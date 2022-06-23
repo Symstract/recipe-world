@@ -21,5 +21,6 @@ declare module "styled-components" {
     };
 
     pageWidth: string;
+    pageMaxWidth: string;
   }
 }

@@ -20,6 +20,7 @@ const theme: DefaultTheme = {
   },
 
   pageWidth: "90%",
+  pageMaxWidth: "1300px",
 };
 
 export default theme;
