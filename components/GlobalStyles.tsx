@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   html {
+    background: ${({ theme }) => theme.colors.surface};
     font-size: 62.5%;
   }
 
