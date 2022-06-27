@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 const SectionContainer = styled.div`
-  margin: 0 auto;
-  width: ${({ theme }) => theme.pageWidth};
-  max-width: ${({ theme }) => theme.pageMaxWidth};
+  padding: 0 ${({ theme }) => theme.pageWidths.mobile.padding};
+  width: 100%;
   height: 100%;
 `;
 

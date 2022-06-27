@@ -19,8 +19,17 @@ const theme: DefaultTheme = {
     desktop: "1440px",
   },
 
-  pageWidth: "90%",
-  pageMaxWidth: "1300px",
+  pageWidths: {
+    mobile: {
+      padding: "16px",
+    },
+    tablet: {
+      padding: "24px",
+    },
+    desktop: {
+      maxWidth: "1300px",
+    },
+  },
 };
 
 export default theme;

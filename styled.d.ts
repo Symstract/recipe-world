@@ -20,7 +20,16 @@ declare module "styled-components" {
       desktop: string;
     };
 
-    pageWidth: string;
-    pageMaxWidth: string;
+    pageWidths: {
+      mobile: {
+        padding: string;
+      };
+      tablet: {
+        padding: string;
+      };
+      desktop: {
+        maxWidth: string;
+      };
+    };
   }
 }
