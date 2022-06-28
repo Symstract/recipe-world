@@ -23,6 +23,10 @@ const GlobalStyles = createGlobalStyle`
     display: block;
   }
 
+  li {
+    list-style: none;
+  }
+
   h1, h2 {
     font-family: ${({ theme }) => theme.fonts.heading};
     color: ${({ theme }) => theme.colors.primary};
