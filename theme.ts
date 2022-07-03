@@ -16,7 +16,7 @@ const theme: DefaultTheme = {
 
   breakpoints: {
     tablet: "768px",
-    desktop: "1440px",
+    desktop: "1100px",
   },
 
   pageWidths: {
