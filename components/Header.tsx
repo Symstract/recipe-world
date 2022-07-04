@@ -108,7 +108,7 @@ function NavItem({ href, icon, label, isActive = false }: NavItemProps) {
   }
 
   return (
-    <NavLink isActive={isActive}>
+    <NavLink isActive={isActive} className="text-primary-hover-brightness">
       <Link href={href} passHref>
         <Button
           icon={icon}
