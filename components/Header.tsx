@@ -160,6 +160,7 @@ function SearchPlaceholder() {
 
   return (
     <Button
+      className="text-primary-hover-brightness"
       icon={<Search />}
       compactStyle={buttonStyleCompactCommon}
       regularStyle={{ width: "5rem", ...buttonStyleRegularCommon }}
