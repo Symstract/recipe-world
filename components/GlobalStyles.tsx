@@ -40,6 +40,11 @@ const GlobalStyles = createGlobalStyle`
     font-size: 2.2rem;
   }
 
+  .text-primary-hover-brightness:hover {
+      filter: brightness(${({ theme }) =>
+        theme.hoverBrightnessPercentages.textPrimary});
+  }
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}){
     h1 {
       font-size: 5.8rem;

@@ -31,5 +31,9 @@ declare module "styled-components" {
         maxWidth: string;
       };
     };
+
+    hoverBrightnessPercentages: {
+      textPrimary: string;
+    };
   }
 }

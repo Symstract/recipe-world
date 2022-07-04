@@ -30,6 +30,10 @@ const theme: DefaultTheme = {
       maxWidth: "1300px",
     },
   },
+
+  hoverBrightnessPercentages: {
+    textPrimary: "400%",
+  },
 };
 
 export default theme;
