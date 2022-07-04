@@ -58,9 +58,29 @@ function HomepageLink() {
   );
 }
 
-const NavLink = styled.li`
+const NavLink = styled.li<{ isActive: boolean }>`
+  position: relative;
   display: block;
   height: 100%;
+`;
+
+const LinkLine = styled.span<{ isActive: boolean }>`
+  position: absolute;
+  bottom: 0;
+  display: none;
+  width: 100%;
+  height: 3px;
+  background: ${({ theme }) => theme.colors.primary};
+  pointer-events: none;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: ${(props) => (props.isActive ? "block" : "none")};
+
+    ${NavLink}:hover & {
+      display: block;
+      background: ${({ theme }) => theme.colors.textPrimary};
+    }
+  }
 `;
 
 interface NavItemProps {
@@ -73,7 +93,6 @@ interface NavItemProps {
 function NavItem({ href, icon, label, isActive = false }: NavItemProps) {
   const theme = useTheme();
 
-  const activeColor = "blue";
   const compactStyle = {
     ...buttonStyleCompactCommon,
   };
@@ -84,13 +103,12 @@ function NavItem({ href, icon, label, isActive = false }: NavItemProps) {
   };
 
   if (isActive) {
-    compactStyle.color = activeColor;
-    regularStyle.color = activeColor;
-    regularStyle.bottomBorderWidth = "3px";
+    compactStyle.color = theme.colors.primary;
+    regularStyle.color = theme.colors.primary;
   }
 
   return (
-    <NavLink>
+    <NavLink isActive={isActive}>
       <Link href={href} passHref>
         <Button
           icon={icon}
@@ -102,6 +120,7 @@ function NavItem({ href, icon, label, isActive = false }: NavItemProps) {
           minWidthToShowRegularLayout={theme.breakpoints.tablet}
         />
       </Link>
+      <LinkLine isActive={isActive} />
     </NavLink>
   );
 }

@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export interface ButtonStyle {
   width?: string;
   height?: string;
   gap?: string;
   padding?: string;
-  bottomBorderWidth?: string;
   color?: string;
+  hoverColor?: string;
   fontSize?: string;
   iconSize?: string;
 }
@@ -40,9 +40,6 @@ const StyledButton = styled.button<ButtonProps>`
   padding: ${(props) => props.compactStyle?.padding || 0};
   background: none;
   border: none;
-  border-color: ${(props) => props.compactStyle?.color || "unset"};
-  border-bottom-width: ${(props) => props.compactStyle?.bottomBorderWidth || 0};
-  border-bottom-style: solid;
   font-size: ${(props) => props.compactStyle?.fontSize || "unset"};
   text-decoration: none;
   cursor: pointer;
@@ -53,22 +50,30 @@ const StyledButton = styled.button<ButtonProps>`
   }
 
   svg *:not([fill="none"]) {
-    fill: ${(props) => props.compactStyle?.color || "initial"};
+    fill: ${(props) =>
+      props.compactStyle?.color || props.theme.colors.textPrimary};
   }
 
   span {
     display: none;
   }
 
+  ${(props) =>
+    props.compactStyle?.hoverColor &&
+    css`
+      &:hover {
+        svg *:not([fill="none"]) {
+          fill: ${(props) => props.compactStyle.hoverColor};
+        }
+      }
+    `}
+
   @media screen and (min-width: ${(props) =>
-      props.minWidthToShowRegularLayout || "0px"}) {
+    props.minWidthToShowRegularLayout || "0px"}) {
     gap: ${(props) => props.regularStyle?.gap || "initial"};
     width: ${(props) => props.regularStyle?.width || "initial"};
     height: ${(props) => props.regularStyle?.height || "initial"};
     padding: ${(props) => props.regularStyle?.padding || 0};
-    border-color: ${(props) => props.regularStyle?.color || "unset"};
-    border-bottom-width: ${(props) =>
-      props.regularStyle?.bottomBorderWidth || 0};
     font-size: ${(props) => props.regularStyle?.fontSize || "unset"};
 
     svg {
@@ -77,13 +82,29 @@ const StyledButton = styled.button<ButtonProps>`
     }
 
     svg *:not([fill="none"]) {
-      fill: ${(props) => props.regularStyle?.color || "initial"};
+      fill: ${(props) =>
+        props.regularStyle?.color || props.theme.colors.textPrimary};
     }
 
     span {
       display: initial;
       color: ${(props) => props.regularStyle?.color || "unset"};
     }
+
+    ${(props) =>
+      props.regularStyle?.hoverColor &&
+      css`
+        &:hover {
+          svg *:not([fill="none"]) {
+            fill: ${(props) => props.compactStyle.hoverColor};
+          }
+
+          span {
+            display: initial;
+            color: ${(props) => props.regularStyle.hoverColor};
+          }
+        }
+      `}
   }
 `;
 
