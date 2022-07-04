@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 
-import Button, { ButtonStyle } from "./Button";
+import { Button, ButtonStyle, LinkButton } from "./Buttons";
 import SectionContainer from "./SectionContainer";
 import Favorite from "../icons/favorite-border.svg";
 import Menu from "../icons/menu-book.svg";
@@ -110,11 +110,9 @@ function NavItem({ href, icon, label, isActive = false }: NavItemProps) {
   return (
     <NavLink isActive={isActive} className="text-primary-hover-brightness">
       <Link href={href} passHref>
-        <Button
+        <LinkButton
           icon={icon}
           label={label}
-          as="a"
-          href={href}
           compactStyle={compactStyle}
           regularStyle={regularStyle}
           minWidthToShowRegularLayout={theme.breakpoints.tablet}

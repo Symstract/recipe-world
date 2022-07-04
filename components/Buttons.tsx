@@ -11,7 +11,7 @@ export interface ButtonStyle {
   iconSize?: string;
 }
 
-interface ButtonProps {
+interface CommonButtonProps {
   label?: string;
   icon?: any;
   /**
@@ -23,12 +23,9 @@ interface ButtonProps {
   regularStyle?: ButtonStyle;
   /** Style for the button when only an icon is shown. */
   compactStyle?: ButtonStyle;
-  as?: "a" | "button";
-  href?: string;
-  onClick?: (e: React.PointerEvent<HTMLButtonElement>) => void;
 }
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button<CommonButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,11 +105,27 @@ const StyledButton = styled.button<ButtonProps>`
   }
 `;
 
-export default function Button({ label, icon, ...rest }: ButtonProps) {
+type ButtonProps = CommonButtonProps & React.HTMLAttributes<HTMLButtonElement>;
+
+export function Button({ label, icon, ...rest }: ButtonProps) {
   return (
     <StyledButton {...rest}>
       {icon}
       <span>{label}</span>
     </StyledButton>
+  );
+}
+
+type LinkButtonProps = CommonButtonProps &
+  React.HTMLAttributes<HTMLButtonElement>;
+
+const StyledLinkButton = styled(StyledButton).attrs({ as: "a" })``;
+
+export function LinkButton({ label, icon, ...rest }: LinkButtonProps) {
+  return (
+    <StyledLinkButton {...rest}>
+      {icon}
+      <span>{label}</span>
+    </StyledLinkButton>
   );
 }
