@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components";
 
+// Common props and styles
+// =============================================================================
+
 export interface ButtonStyle {
   width?: string;
   height?: string;
@@ -25,7 +28,7 @@ interface CommonButtonProps {
   compactStyle?: ButtonStyle;
 }
 
-const StyledButton = styled.button<CommonButtonProps>`
+const style = css<CommonButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,7 +108,14 @@ const StyledButton = styled.button<CommonButtonProps>`
   }
 `;
 
+// Button
+// =============================================================================
+
 type ButtonProps = CommonButtonProps & React.HTMLAttributes<HTMLButtonElement>;
+
+const StyledButton = styled.button<ButtonProps>`
+  ${style}
+`;
 
 export function Button({ label, icon, ...rest }: ButtonProps) {
   return (
@@ -116,10 +126,15 @@ export function Button({ label, icon, ...rest }: ButtonProps) {
   );
 }
 
-type LinkButtonProps = CommonButtonProps &
-  React.HTMLAttributes<HTMLButtonElement>;
+// LinkButton
+// =============================================================================
 
-const StyledLinkButton = styled(StyledButton).attrs({ as: "a" })``;
+type LinkButtonProps = CommonButtonProps &
+  React.HTMLAttributes<HTMLAnchorElement>;
+
+const StyledLinkButton = styled.a<LinkButtonProps>`
+  ${style}
+`;
 
 export function LinkButton({ label, icon, ...rest }: LinkButtonProps) {
   return (
