@@ -141,7 +141,7 @@ function Nav() {
   return (
     <StyledNav>
       <NavLinkList>
-        <NavItem href="recipes" icon={<Menu />} label="Recipes" />
+        <NavItem href="/" icon={<Menu />} label="Recipes" />
         <NavItem href="/" icon={<Favorite />} label="Favorites" />
       </NavLinkList>
     </StyledNav>
