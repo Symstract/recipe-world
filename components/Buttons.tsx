@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled, { css } from "styled-components";
 
 // Common props and styles
@@ -136,11 +137,13 @@ const StyledLinkButton = styled.a<LinkButtonProps>`
   ${style}
 `;
 
-export function LinkButton({ label, icon, ...rest }: LinkButtonProps) {
-  return (
-    <StyledLinkButton {...rest}>
-      {icon}
-      <span>{label}</span>
-    </StyledLinkButton>
-  );
-}
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
+  function linkButton({ label, icon, ...rest }, ref) {
+    return (
+      <StyledLinkButton ref={ref} {...rest}>
+        {icon}
+        <span>{label}</span>
+      </StyledLinkButton>
+    );
+  }
+);
