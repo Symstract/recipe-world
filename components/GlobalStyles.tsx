@@ -30,6 +30,8 @@ const GlobalStyles = createGlobalStyle`
   h1, h2 {
     font-family: ${({ theme }) => theme.fonts.heading};
     color: ${({ theme }) => theme.colors.primary};
+    font-weight: 700;
+    line-height: 1em;
   }
 
   h1 {
@@ -43,6 +45,20 @@ const GlobalStyles = createGlobalStyle`
   .text-primary-hover-brightness:hover {
       filter: brightness(${({ theme }) =>
         theme.hoverBrightnessPercentages.textPrimary});
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}){
+    h1 {
+      font-size: 4.2rem;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+    }
+
+    body {
+      font-size: 1.8rem;
+    }
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}){
