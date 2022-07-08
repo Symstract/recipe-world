@@ -59,6 +59,12 @@ const style = css<CommonButtonProps>`
     display: none;
   }
 
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: ${({ theme }) => theme.inputDisabledOpacity};
+    cursor: default;
+  }
+
   ${(props) =>
     props.compactStyle?.hoverColor &&
     css`

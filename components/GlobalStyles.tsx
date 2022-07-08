@@ -42,7 +42,14 @@ const GlobalStyles = createGlobalStyle`
     font-size: 2.2rem;
   }
 
-  .text-primary-hover-brightness:hover {
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance:none;
+}
+
+  .text-primary-hover-brightness:not(:disabled):not([aria-disabled="true"]):hover {
       filter: brightness(${({ theme }) =>
         theme.hoverBrightnessPercentages.textPrimary});
   }

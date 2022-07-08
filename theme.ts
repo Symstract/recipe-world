@@ -34,6 +34,9 @@ const theme: DefaultTheme = {
   hoverBrightnessPercentages: {
     textPrimary: "400%",
   },
+
+  inputInactiveOpacity: 0.6,
+  inputDisabledOpacity: 0.6,
 };
 
 export default theme;

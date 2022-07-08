@@ -35,5 +35,8 @@ declare module "styled-components" {
     hoverBrightnessPercentages: {
       textPrimary: string;
     };
+
+    inputInactiveOpacity: number;
+    inputDisabledOpacity: nummber;
   }
 }
