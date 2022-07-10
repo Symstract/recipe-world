@@ -18,6 +18,7 @@ export interface ButtonStyle {
 interface CommonButtonProps {
   label?: string;
   icon?: any;
+  hoverIcon?: any;
   /**
    * Minimum width at which to show the regular layout which displays also the
    * label if that's given (instead of only the icon).
@@ -64,6 +65,23 @@ const style = css<CommonButtonProps>`
     opacity: ${({ theme }) => theme.inputDisabledOpacity};
     cursor: default;
   }
+
+  ${(props) =>
+    props.hoverIcon &&
+    css`
+      svg:last-of-type {
+        display: none;
+      }
+
+      &:hover {
+        svg:first-of-type {
+          display: none;
+        }
+        svg:last-of-type {
+          display: initial;
+        }
+      }
+    `}
 
   ${(props) =>
     props.compactStyle?.hoverColor &&
@@ -124,10 +142,13 @@ const StyledButton = styled.button<ButtonProps>`
   ${style}
 `;
 
-export function Button({ label, icon, ...rest }: ButtonProps) {
+export function Button(props: ButtonProps) {
+  const { label, icon, hoverIcon } = props;
+
   return (
-    <StyledButton {...rest}>
+    <StyledButton {...props}>
       {icon}
+      {hoverIcon}
       <span>{label}</span>
     </StyledButton>
   );
@@ -144,10 +165,13 @@ const StyledLinkButton = styled.a<LinkButtonProps>`
 `;
 
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
-  function linkButton({ label, icon, ...rest }, ref) {
+  function linkButton(props, ref) {
+    const { label, icon, hoverIcon } = props;
+
     return (
-      <StyledLinkButton ref={ref} {...rest}>
+      <StyledLinkButton ref={ref} {...props}>
         {icon}
+        {hoverIcon}
         <span>{label}</span>
       </StyledLinkButton>
     );
