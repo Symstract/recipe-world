@@ -21,7 +21,7 @@ const theme: DefaultTheme = {
 
   pageWidths: {
     mobile: {
-      padding: "16px",
+      padding: "18px",
     },
     tablet: {
       padding: "24px",
