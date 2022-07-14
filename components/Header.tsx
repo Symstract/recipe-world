@@ -178,7 +178,7 @@ const HeaderContent = styled.div`
 
 const StyledHeader = styled.header`
   width: 100%;
-  height: calc(5rem + 1px);
+  height: calc(5.4rem + 1px);
   border-bottom: 1px solid;
   border-color: ${({ theme }) => theme.colors.primary};
   background: ${({ theme }) => theme.colors.surface};
