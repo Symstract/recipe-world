@@ -5,6 +5,10 @@ const nextConfig = {
     styledComponents: true,
   },
 
+  images: {
+    domains: ["spoonacular.com"],
+  },
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
