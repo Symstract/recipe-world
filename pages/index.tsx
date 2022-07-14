@@ -18,7 +18,7 @@ const HeroImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 130px;
+  height: 150px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   background-image: url(${heroImage.src});
   background-position: center;
@@ -42,7 +42,7 @@ const StyledSearchSection = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 120px;
+  height: 145px;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 220px;
