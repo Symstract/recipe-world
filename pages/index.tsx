@@ -98,9 +98,9 @@ const RecipeGroupLinkToMore = styled.a`
 const StyledRecipeGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 2rem;
   width: 100%;
-  padding-bottom: 1.8rem;
+  padding-bottom: 2rem;
 `;
 
 function RecipeGroup({
