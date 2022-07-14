@@ -75,8 +75,9 @@ const RecipeGroupHeadingLink = styled.a`
   text-decoration: none;
 
   svg {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-left: 0.3em;
   }
 
   svg *:not([fill="none"]) {
