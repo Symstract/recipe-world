@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PageHeadingBlock = styled.div`
-  padding: 8px 28px;
+  padding: 9px 28px;
   background: ${({ theme }) => theme.colors.primary};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
   transform: rotate(-3deg);
