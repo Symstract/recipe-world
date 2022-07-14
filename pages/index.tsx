@@ -30,7 +30,7 @@ const HeroImage = styled.div`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    height: 300x;
+    height: 300px;
   }
 `;
 
