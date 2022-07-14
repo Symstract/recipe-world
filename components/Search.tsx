@@ -25,10 +25,6 @@ const SearchField = styled.input.attrs({
         theme.inputInactiveOpacity
       )};
   }
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 2rem;
-  }
 `;
 
 const StyledSearch = styled.form<{ hasFocus: boolean }>`
