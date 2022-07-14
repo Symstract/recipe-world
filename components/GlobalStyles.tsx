@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     min-height: 100vh;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
   * {
@@ -35,11 +35,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
   }
 
   h2 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
 
   input[type="search"]::-webkit-search-decoration,
