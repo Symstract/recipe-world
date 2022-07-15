@@ -98,6 +98,7 @@ const RecipeGroupLinkToMore = styled.a`
 const StyledRecipeGroup = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 20px;
   width: 100%;
   padding-bottom: 2rem;
@@ -121,7 +122,6 @@ function RecipeGroup({
           <NavigateNext />
         </RecipeGroupHeadingLink>
       </Link>
-
       <RecipeCardList recipeCardPropList={recipeCardPropList} />
       <Link href={linkToMore} passHref>
         <RecipeGroupLinkToMore>{linkToMoreLabel}</RecipeGroupLinkToMore>
