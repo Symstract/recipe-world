@@ -25,6 +25,10 @@ const Title = styled.div`
   width: 100%;
   font-size: 1.6rem;
   font-family: ${({ theme }) => theme.fonts.heading};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    font-size: 1.8rem;
+  }
 `;
 
 interface FavoriteToggleProps {
@@ -119,6 +123,17 @@ const StyledTime = styled.div`
     font-size: 1.5rem;
     line-height: 1em;
   }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 function Time({ timeInMinutes }: { timeInMinutes: number }) {
@@ -172,6 +187,10 @@ const StyledRecipeCard = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 1.2rem;
+  }
 `;
 
 export default function RecipeCard({

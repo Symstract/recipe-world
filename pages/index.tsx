@@ -98,9 +98,13 @@ const RecipeGroupLinkToMore = styled.a`
 const StyledRecipeGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 20px;
   width: 100%;
   padding-bottom: 2rem;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 32px;
+  }
 `;
 
 function RecipeGroup({
@@ -118,7 +122,7 @@ function RecipeGroup({
         </RecipeGroupHeadingLink>
       </Link>
 
-      <RecipeCardList recipeCardPropList={recipeCardPropList} gap={"1.8rem"} />
+      <RecipeCardList recipeCardPropList={recipeCardPropList} />
       <Link href={linkToMore} passHref>
         <RecipeGroupLinkToMore>{linkToMoreLabel}</RecipeGroupLinkToMore>
       </Link>
@@ -151,7 +155,7 @@ function PopularRecipesSection() {
       id: "23523df5",
       href: "/",
       imageURL: "#",
-      title: "deodklgmoiergg",
+      title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
       isFavorite: false,
       rating: 8.9,
       timeInMinutes: 70,

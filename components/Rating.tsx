@@ -16,6 +16,13 @@ const StyledRating = styled.div`
   svg * {
     fill: ${({ theme }) => theme.colors.accent};
   }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    * {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
 `;
 
 export function Rating({ rating }: { rating: number }) {
