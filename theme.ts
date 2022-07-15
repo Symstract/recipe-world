@@ -27,7 +27,7 @@ const theme: DefaultTheme = {
       padding: "24px",
     },
     desktop: {
-      maxWidth: "1300px",
+      maxWidth: "1250px",
     },
   },
 
