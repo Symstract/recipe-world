@@ -102,7 +102,7 @@ function FavoriteToggle(props: FavoriteToggleProps) {
 
 const TitleAndFavoriteButton = styled.div`
   display: flex;
-  gap: 0.8rem;
+  gap: 1.5em;
   width: 100%;
 `;
 
