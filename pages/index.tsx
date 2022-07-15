@@ -93,6 +93,10 @@ const RecipeGroupLinkToMore = styled.a`
   align-self: flex-end;
   font-size: 1.7rem;
   line-height: 1em;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    font-size: 2rem;
+  }
 `;
 
 const StyledRecipeGroup = styled.div`
