@@ -5,6 +5,7 @@ import "@fontsource/carlito";
 import "@fontsource/tienne";
 
 import GlobalStyles from "../components/GlobalStyles";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import theme from "../theme";
 
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </ThemeProvider>
   );
 }
