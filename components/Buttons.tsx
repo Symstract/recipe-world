@@ -136,7 +136,8 @@ const style = css<CommonButtonProps>`
 // Button
 // =============================================================================
 
-type ButtonProps = CommonButtonProps & React.HTMLAttributes<HTMLButtonElement>;
+type ButtonProps = CommonButtonProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const StyledButton = styled.button<ButtonProps>`
   ${style}
@@ -158,7 +159,7 @@ export function Button(props: ButtonProps) {
 // =============================================================================
 
 type LinkButtonProps = CommonButtonProps &
-  React.HTMLAttributes<HTMLAnchorElement>;
+  React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const StyledLinkButton = styled.a<LinkButtonProps>`
   ${style}
