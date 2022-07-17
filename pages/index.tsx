@@ -42,10 +42,10 @@ const StyledSearchSection = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 145px;
+  height: 14.5rem;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    height: 220px;
+    height: 22rem;
   }
 `;
 
@@ -207,6 +207,79 @@ function PopularRecipesSection() {
   );
 }
 
+function HealthyRecipesSection() {
+  // Initial test content
+  const recipeCardPropList = [
+    {
+      id: "sdgfjknergg",
+      href: "/",
+      imageURL: "#",
+      title: "Pasta Bolognese",
+      isFavorite: true,
+      rating: 7.4,
+      timeInMinutes: 145,
+    },
+    {
+      id: "235dfsd",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: false,
+      rating: 6.7,
+      timeInMinutes: 45,
+    },
+    {
+      id: "23523df5",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
+      isFavorite: false,
+      rating: 8.9,
+      timeInMinutes: 70,
+    },
+    {
+      id: "346fgg233",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: true,
+      rating: 3,
+      timeInMinutes: 25,
+    },
+    {
+      id: "sdg346fgdf",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: false,
+      rating: 6.7,
+      timeInMinutes: 110,
+    },
+    {
+      id: "75l7ifgn",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: false,
+      rating: 9.79,
+      timeInMinutes: 35,
+    },
+  ];
+
+  return (
+    <section>
+      <SectionContainer>
+        <RecipeGroup
+          heading="Healthy"
+          recipeCardPropList={recipeCardPropList}
+          linkToMore="#"
+          linkToMoreLabel="More Healthy Recipes"
+        />
+      </SectionContainer>
+    </section>
+  );
+}
+
 // Page
 // =============================================================================
 
@@ -225,6 +298,7 @@ const Home: NextPage = () => {
         </HeroImage>
         <SearchSection />
         <PopularRecipesSection />
+        <HealthyRecipesSection />
       </main>
     </>
   );
