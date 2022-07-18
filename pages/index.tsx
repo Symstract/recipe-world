@@ -101,12 +101,13 @@ const StyledRecipeGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 2rem;
   width: 100%;
   padding-bottom: 2rem;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    gap: 32px;
+    gap: 3.2rem;
+    padding-bottom: 3.2rem;
   }
 `;
 
