@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -15,15 +16,12 @@ import NavigateNext from "../icons/navigate-next.svg";
 // =============================================================================
 
 const HeroImage = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 150px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
-  background-image: url(${heroImage.src});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 265px;
@@ -292,6 +290,7 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <HeroImage>
+          <Image src={heroImage} alt="" layout="fill" objectFit="cover" />
           <PageHeadingBlock>
             <h1>Let&apos;s cook!</h1>
           </PageHeadingBlock>
