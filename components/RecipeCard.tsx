@@ -15,7 +15,6 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 20 / 13;
-  background: green;
 `;
 
 // Title and favorite toggle
