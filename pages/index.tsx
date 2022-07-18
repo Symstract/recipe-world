@@ -8,7 +8,7 @@ import heroImage from "../images/anto-meneghini-YiaDJAjD1S0-unsplash.jpg";
 import PageHeadingBlock from "../components/PageHeadingBlock";
 import { RecipeCardProps } from "../components/RecipeCard";
 import RecipeCardList from "../components/RecipeCardList";
-import Search from "../components/Search";
+import SearchField from "../components/SearchField";
 import SectionContainer from "../components/SectionContainer";
 import NavigateNext from "../icons/navigate-next.svg";
 
@@ -51,7 +51,7 @@ function SearchSection() {
   return (
     <SectionContainer>
       <StyledSearchSection>
-        <Search />
+        <SearchField />
       </StyledSearchSection>
     </SectionContainer>
   );

@@ -1,83 +1,149 @@
-import { useRef, useState } from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 
-import { Button } from "./Buttons";
-import SearchIcon from "../icons/search.svg";
-import { addOpacityToHexColor } from "../lib/colorUtils";
+import SortIcon from "../icons/sort.svg";
+import RecipeCardList from "./RecipeCardList";
+import SearchField from "./SearchField";
 
-const SearchField = styled.input.attrs({
-  type: "search",
-  placeholder: "Search recipes",
-})`
+const SearchFieldContainer = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  border: none;
-  background: none;
-  font-size: 2rem;
+  height: 14rem;
 
-  &:focus {
-    outline: none;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    height: 20rem;
   }
 
-  &::placeholder {
-    color: ${({ theme }) =>
-      addOpacityToHexColor(
-        theme.colors.textPrimary,
-        theme.inputInactiveOpacity
-      )};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    height: 23rem;
   }
 `;
 
-const StyledSearch = styled.form<{ hasFocus: boolean }>`
+const StyledSorting = styled.div`
   display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  height: 4rem;
+
+  span {
+    font-size: 1.7rem;
+    line-height: 1em;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    span {
+      font-size: 1.8rem;
+    }
+  }
+`;
+
+function Sorting() {
+  return (
+    <StyledSorting>
+      <SortIcon />
+      <span>Popular</span>
+    </StyledSorting>
+  );
+}
+
+const ResultsTitleAndSettings = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 700px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: ${(props) =>
-    props.hasFocus
-      ? props.theme.colors.textPrimary
-      : addOpacityToHexColor(
-          props.theme.colors.textPrimary,
-          props.theme.inputInactiveOpacity
-        )};
-  line-height: 1em;
+  gap: 1.8rem;
+  margin-bottom: 1.8rem;
+
+  & > span {
+    font-family: ${({ theme }) => theme.fonts.heading};
+    font-size: 2rem;
+    line-height: 1em;
+    color: ${({ theme }) => theme.colors.primary};
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.4rem;
+    margin-bottom: 2.4rem;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 3.2rem;
+    margin-bottom: 3.2rem;
+  }
 `;
 
 export default function Search() {
-  const [hasFocus, setHasFocus] = useState(false);
-  const [hasInput, setHasInput] = useState(false);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-  const theme = useTheme();
-
-  const handleFocus = () => {
-    setHasFocus(true);
-  };
-
-  const handleBlur = () => {
-    setHasFocus(false);
-  };
-
-  const handleInput = () => {
-    setHasInput(!!inputRef.current?.value.length);
-  };
+  // Initial test content
+  const recipeCardPropList = [
+    {
+      id: "sdgfjknergg",
+      href: "/",
+      imageURL: "#",
+      title: "Pasta Bolognese",
+      isFavorite: true,
+      rating: 7.4,
+      timeInMinutes: 145,
+    },
+    {
+      id: "235dfsd",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: false,
+      rating: 6.7,
+      timeInMinutes: 45,
+    },
+    {
+      id: "23523df5",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
+      isFavorite: false,
+      rating: 8.9,
+      timeInMinutes: 70,
+    },
+    {
+      id: "346fgg233",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: true,
+      rating: 3,
+      timeInMinutes: 25,
+    },
+    {
+      id: "sdg346fgdf",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: false,
+      rating: 6.7,
+      timeInMinutes: 110,
+    },
+    {
+      id: "75l7ifgn",
+      href: "/",
+      imageURL: "#",
+      title: "deodklgmoiergg",
+      isFavorite: false,
+      rating: 9.79,
+      timeInMinutes: 35,
+    },
+  ];
 
   return (
-    <StyledSearch hasFocus={hasFocus}>
-      <SearchField
-        ref={inputRef}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onInput={handleInput}
-      />
-      <Button
-        icon={<SearchIcon />}
-        minWidthToShowRegularLayout={theme.breakpoints.tablet}
-        compactStyle={{ width: "4rem", height: "4rem", iconSize: "2.4rem" }}
-        regularStyle={{ width: "4rem", height: "4rem", iconSize: "2.8rem" }}
-        className={"text-primary-hover-brightness"}
-        aria-disabled={!hasInput}
-      />
-    </StyledSearch>
+    <>
+      <SearchFieldContainer>
+        <SearchField />
+      </SearchFieldContainer>
+      <ResultsTitleAndSettings>
+        <span>Showing All Recipes</span>
+        <Sorting />
+      </ResultsTitleAndSettings>
+      <RecipeCardList recipeCardPropList={recipeCardPropList} />
+    </>
   );
 }
