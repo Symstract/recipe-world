@@ -59,7 +59,7 @@ export default function Footer() {
     <StyledFooter>
       <SocialMediaLinkList>
         <li>
-          <SocialMediaLink icon={<Twitter />} href="#" />
+          <SocialMediaLink icon={<Instagram />} href="#" />
         </li>
         <li>
           <SocialMediaLink icon={<Facebook />} href="#" />
