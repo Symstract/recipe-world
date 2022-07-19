@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
-import heroImage from "../images/anto-meneghini-YiaDJAjD1S0-unsplash.jpg";
-import PageHeadingBlock from "../components/PageHeadingBlock";
-import { RecipeCardProps } from "../components/RecipeCard";
-import RecipeCardList from "../components/RecipeCardList";
-import SearchField from "../components/SearchField";
-import SectionContainer from "../components/SectionContainer";
-import NavigateNext from "../icons/navigate-next.svg";
+import heroImage from "images/anto-meneghini-YiaDJAjD1S0-unsplash.jpg";
+import PageHeadingBlock from "components/PageHeadingBlock";
+import { RecipeCardProps } from "components/RecipeCard";
+import RecipeCardList from "components/RecipeCardList";
+import SearchField from "components/SearchField";
+import SectionContainer from "components/SectionContainer";
+import NavigateNext from "icons/navigate-next.svg";
 
 // Hero image and text
 // =============================================================================

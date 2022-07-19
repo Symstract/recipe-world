@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 
-import { Button } from "./Buttons";
-import SearchIcon from "../icons/search.svg";
-import { addOpacityToHexColor } from "../lib/colorUtils";
+import { Button } from "components/Buttons";
+import SearchIcon from "icons/search.svg";
+import { addOpacityToHexColor } from "lib/colorUtils";
 
 const SearchInput = styled.input.attrs({
   type: "search",

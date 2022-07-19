@@ -3,11 +3,11 @@ import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
 
-import backgroundImage from "../images/favorites-background.jpg";
-import PageHeadingBlock from "../components/PageHeadingBlock";
-import PageHeadingSectionContainer from "../components/PageHeadingSectionContainer";
-import SectionContainer from "../components/SectionContainer";
-import RecipeCardList from "../components/RecipeCardList";
+import backgroundImage from "images/favorites-background.jpg";
+import PageHeadingBlock from "components/PageHeadingBlock";
+import PageHeadingSectionContainer from "components/PageHeadingSectionContainer";
+import SectionContainer from "components/SectionContainer";
+import RecipeCardList from "components/RecipeCardList";
 
 const HeadingSection = styled.div`
   position: relative;

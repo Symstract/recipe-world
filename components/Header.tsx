@@ -1,12 +1,12 @@
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 
-import { Button, ButtonStyle, LinkButton } from "./Buttons";
-import SectionContainer from "./SectionContainer";
-import Favorite from "../icons/favorite-border.svg";
-import Menu from "../icons/menu-book.svg";
-import Search from "../icons/search.svg";
-import Logo from "../logo.svg";
+import { Button, ButtonStyle, LinkButton } from "components/Buttons";
+import SectionContainer from "components/SectionContainer";
+import Favorite from "icons/favorite-border.svg";
+import Menu from "icons/menu-book.svg";
+import Search from "icons/search.svg";
+import Logo from "logo.svg";
 
 // Common button styles
 // =============================================================================

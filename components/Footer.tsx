@@ -1,9 +1,9 @@
 import styled, { useTheme } from "styled-components";
 
-import { LinkButton } from "./Buttons";
-import Facebook from "../icons/facebook-brands.svg";
-import Instagram from "../icons/instagram-brands.svg";
-import Twitter from "../icons/twitter-brands.svg";
+import { LinkButton } from "components/Buttons";
+import Facebook from "icons/facebook-brands.svg";
+import Instagram from "icons/instagram-brands.svg";
+import Twitter from "icons/twitter-brands.svg";
 
 const SocialMediaLinkList = styled.ul`
   display: flex;

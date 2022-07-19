@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import RecipeCard, { RecipeCardProps } from "./RecipeCard";
+
+import RecipeCard, { RecipeCardProps } from "components/RecipeCard";
 
 interface RecipeCardListProps {
   recipeCardPropList: Array<RecipeCardProps>;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import StarEmpty from "../icons/grade.svg";
-import StarHalf from "../icons/star-half.svg";
-import StarFull from "../icons/star.svg";
+import StarEmpty from "icons/grade.svg";
+import StarHalf from "icons/star-half.svg";
+import StarFull from "icons/star.svg";
 
 const StyledRating = styled.div`
   display: flex;

@@ -3,12 +3,12 @@ import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
 
-import backgroundImageSmall from "../images/recipes-background-small.jpg";
-import backgroundImageLarge from "../images/recipes-background-large.jpg";
-import PageHeadingBlock from "../components/PageHeadingBlock";
-import PageHeadingSectionContainer from "../components/PageHeadingSectionContainer";
-import Search from "../components/Search";
-import SectionContainer from "../components/SectionContainer";
+import backgroundImageLarge from "images/recipes-background-large.jpg";
+import backgroundImageSmall from "images/recipes-background-small.jpg";
+import PageHeadingBlock from "components/PageHeadingBlock";
+import PageHeadingSectionContainer from "components/PageHeadingSectionContainer";
+import Search from "components/Search";
+import SectionContainer from "components/SectionContainer";
 
 const HeadingSection = styled.div`
   position: relative;

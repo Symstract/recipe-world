@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import SortIcon from "../icons/sort.svg";
-import RecipeCardList from "./RecipeCardList";
-import SearchField from "./SearchField";
+import SortIcon from "icons/sort.svg";
+import RecipeCardList from "components/RecipeCardList";
+import SearchField from "components/SearchField";
 
 const SearchFieldContainer = styled.section`
   display: flex;

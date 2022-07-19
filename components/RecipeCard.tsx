@@ -1,12 +1,12 @@
-import styled, { useTheme } from "styled-components";
-
-import { Button, ButtonStyle } from "./Buttons";
-import { Rating } from "./Rating";
-import FavoriteIcon from "../icons/favorite-filled.svg";
-import NotFavoriteIcon from "../icons/favorite-border.svg";
-import Clock from "../icons/schedule.svg";
 import Image from "next/image";
 import Link from "next/link";
+import styled, { useTheme } from "styled-components";
+
+import { Button, ButtonStyle } from "components/Buttons";
+import { Rating } from "components/Rating";
+import FavoriteIcon from "icons/favorite-filled.svg";
+import NotFavoriteIcon from "icons/favorite-border.svg";
+import Clock from "icons/schedule.svg";
 
 // Image
 // =============================================================================
