@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 
 import { Button, ButtonStyle } from "components/Buttons";
-import { Rating } from "components/Rating";
+import Rating from "components/Rating";
 import FavoriteIcon from "icons/favorite-filled.svg";
 import NotFavoriteIcon from "icons/favorite-border.svg";
 import Clock from "icons/schedule.svg";

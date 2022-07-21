@@ -25,7 +25,7 @@ const StyledRating = styled.div`
   }
 `;
 
-export function Rating({ rating }: { rating: number }) {
+export default function Rating({ rating }: { rating: number }) {
   const ratingScaled = Math.round(rating) / 2;
   const fullStarCount = Math.floor(ratingScaled);
   const halfStarCount = fullStarCount - Math.ceil(ratingScaled);
