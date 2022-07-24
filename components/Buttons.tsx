@@ -40,11 +40,8 @@ const style = css<CommonButtonProps>`
   width: ${(props) => props.compactStyle?.width || "initial"};
   height: ${(props) => props.compactStyle?.height || "initial"};
   padding: ${(props) => props.compactStyle?.padding || 0};
-  background: none;
-  border: none;
   font-size: ${(props) => props.compactStyle?.fontSize || "unset"};
   text-decoration: none;
-  cursor: pointer;
 
   svg {
     width: ${(props) => props.compactStyle?.iconSize || "initial"};

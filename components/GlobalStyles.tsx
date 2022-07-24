@@ -27,6 +27,12 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
 
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
   h1, h2 {
     font-family: ${({ theme }) => theme.fonts.heading};
     color: ${({ theme }) => theme.colors.primary};
