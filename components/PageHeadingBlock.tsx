@@ -8,6 +8,7 @@ const PageHeadingBlock = styled.div`
 
   h1 {
     color: white;
+    line-height: 1em;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
@@ -15,6 +16,10 @@ const PageHeadingBlock = styled.div`
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 12px 50px;
+
+    h1 {
+      font-size: 5.8rem;
+    }
   }
 `;
 

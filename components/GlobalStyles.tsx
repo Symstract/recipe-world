@@ -37,7 +37,6 @@ const GlobalStyles = createGlobalStyle`
     font-family: ${({ theme }) => theme.fonts.heading};
     color: ${({ theme }) => theme.colors.primary};
     font-weight: 700;
-    line-height: 1em;
   }
 
   h1 {
@@ -76,11 +75,11 @@ const GlobalStyles = createGlobalStyle`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}){
     h1 {
-      font-size: 5.8rem;
+      font-size: 5rem;
     }
 
     h2 {
-      font-size: 3.6rem;
+      font-size: 3.2rem;
     }
 
     body {
