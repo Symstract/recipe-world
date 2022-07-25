@@ -118,7 +118,7 @@ const style = css<CommonButtonProps>`
       css`
         &:hover {
           svg *:not([fill="none"]) {
-            fill: ${(props) => props.compactStyle.hoverColor};
+            fill: ${(props) => props.regularStyle.hoverColor};
           }
 
           span {
