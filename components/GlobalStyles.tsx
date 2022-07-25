@@ -54,11 +54,6 @@ const GlobalStyles = createGlobalStyle`
     -webkit-appearance:none;
 }
 
-  .text-primary-hover-brightness:not(:disabled):not([aria-disabled="true"]):hover {
-      filter: brightness(${({ theme }) =>
-        theme.hoverBrightnessPercentages.textPrimary});
-  }
-
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}){
     h1 {
       font-size: 4.2rem;

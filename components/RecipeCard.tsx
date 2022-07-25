@@ -149,9 +149,7 @@ const StyledRecipeLink = styled.a`
 
   &:hover ${Title} {
     text-decoration: underline;
-    filter: brightness(
-      ${({ theme }) => theme.hoverBrightnessPercentages.textPrimary}
-    );
+    color: ${({ theme }) => theme.colors.textPrimaryHover};
   }
 `;
 

@@ -7,6 +7,7 @@ declare module "styled-components" {
       accent: string;
       surface: string;
       textPrimary: string;
+      textPrimaryHover: string;
       textSecondary: string;
     };
 
@@ -35,10 +36,6 @@ declare module "styled-components" {
     footerHeights: {
       mobile: string;
       tablet: string;
-    };
-
-    hoverBrightnessPercentages: {
-      textPrimary: string;
     };
 
     inputInactiveOpacity: number;

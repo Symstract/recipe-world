@@ -6,6 +6,7 @@ const theme: DefaultTheme = {
     accent: "#64336C",
     surface: "#FCFFF5",
     textPrimary: "#1B1B1B",
+    textPrimaryHover: "#505050",
     textSecondary: "rgba(0, 0, 0, 0.8)",
   },
 
@@ -34,10 +35,6 @@ const theme: DefaultTheme = {
   footerHeights: {
     mobile: "6rem",
     tablet: "7rem",
-  },
-
-  hoverBrightnessPercentages: {
-    textPrimary: "400%",
   },
 
   inputInactiveOpacity: 0.6,

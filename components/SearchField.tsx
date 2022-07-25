@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 
-import { Button } from "components/Buttons";
+import { Button, ButtonStyle } from "components/Buttons";
 import SearchIcon from "icons/search.svg";
 import { addOpacityToHexColor } from "lib/colorUtils";
 
@@ -62,6 +62,12 @@ export default function SearchField() {
     setHasInput(!!inputRef.current?.value.length);
   };
 
+  const commonStyle: ButtonStyle = {
+    width: "4rem",
+    height: "4rem",
+    hoverColor: theme.colors.textPrimaryHover,
+  };
+
   return (
     <StyledSearch hasFocus={hasFocus}>
       <SearchInput
@@ -73,9 +79,8 @@ export default function SearchField() {
       <Button
         icon={<SearchIcon />}
         minWidthToShowRegularLayout={theme.breakpoints.tablet}
-        compactStyle={{ width: "4rem", height: "4rem", iconSize: "2.4rem" }}
-        regularStyle={{ width: "4rem", height: "4rem", iconSize: "2.8rem" }}
-        className={"text-primary-hover-brightness"}
+        compactStyle={{ iconSize: "2.4rem", ...commonStyle }}
+        regularStyle={{ iconSize: "2.8rem", ...commonStyle }}
         aria-disabled={!hasInput}
       />
     </StyledSearch>

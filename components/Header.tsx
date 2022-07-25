@@ -79,7 +79,7 @@ const LinkLine = styled.span<{ isActive: boolean }>`
 
     ${NavLink}:hover & {
       display: block;
-      background: ${({ theme }) => theme.colors.textPrimary};
+      background: ${({ theme }) => theme.colors.textPrimaryHover};
     }
   }
 `;
@@ -95,23 +95,23 @@ function NavItem({ href, icon, label, isActive = false }: NavItemProps) {
   const theme = useTheme();
 
   const compactStyle = {
+    hoverColor: theme.colors.textPrimaryHover,
     ...buttonStyleCompactCommon,
   };
   const regularStyle = {
     gap: "1.2rem",
     fontSize: "2rem",
+    hoverColor: theme.colors.textPrimaryHover,
     ...buttonStyleRegularCommon,
   };
 
   if (isActive) {
     compactStyle.color = theme.colors.primary;
     regularStyle.color = theme.colors.primary;
-    compactStyle.hoverColor = theme.colors.textPrimary;
-    regularStyle.hoverColor = theme.colors.textPrimary;
   }
 
   return (
-    <NavLink isActive={isActive} className="text-primary-hover-brightness">
+    <NavLink isActive={isActive}>
       <Link href={href} passHref>
         <LinkButton
           icon={icon}
@@ -177,10 +177,16 @@ function SearchPlaceholder() {
 
   return (
     <Button
-      className="text-primary-hover-brightness"
       icon={<Search />}
-      compactStyle={buttonStyleCompactCommon}
-      regularStyle={{ width: "5rem", ...buttonStyleRegularCommon }}
+      compactStyle={{
+        hoverColor: theme.colors.textPrimaryHover,
+        ...buttonStyleCompactCommon,
+      }}
+      regularStyle={{
+        width: "5rem",
+        hoverColor: theme.colors.textPrimaryHover,
+        ...buttonStyleRegularCommon,
+      }}
       minWidthToShowRegularLayout={theme.breakpoints.tablet}
     />
   );
