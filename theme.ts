@@ -31,6 +31,11 @@ const theme: DefaultTheme = {
     },
   },
 
+  footerHeights: {
+    mobile: "6rem",
+    tablet: "7rem",
+  },
+
   hoverBrightnessPercentages: {
     textPrimary: "400%",
   },

@@ -40,16 +40,18 @@ function SocialMediaLink({ icon, href }: SocialMediaLinkProps) {
 }
 
 const StyledFooter = styled.footer`
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 6rem;
+  height: ${({ theme }) => theme.footerHeights.mobile};
   margin-top: 1rem;
   background: #d7dcc9;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    height: 7rem;
+    height: ${({ theme }) => theme.footerHeights.tablet};
     margin-top: 1.5rem;
   }
 `;

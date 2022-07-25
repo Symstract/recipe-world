@@ -32,6 +32,11 @@ declare module "styled-components" {
       };
     };
 
+    footerHeights: {
+      mobile: string;
+      tablet: string;
+    };
+
     hoverBrightnessPercentages: {
       textPrimary: string;
     };
