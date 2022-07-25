@@ -56,21 +56,12 @@ function FavoriteToggle(props: FavoriteToggleProps) {
 
   const theme = useTheme();
 
-  const compactStyle: ButtonStyle = {
+  const style: ButtonStyle = {
     color: theme.colors.accent,
     iconSize: "100%",
     width: "100%",
     height: "100%",
   };
-
-  const regularStyle: ButtonStyle = {
-    color: theme.colors.accent,
-    iconSize: "100%",
-    width: "100%",
-    height: "100%",
-  };
-
-  const minWidthToShowRegularLayout = theme.breakpoints.desktop;
 
   let button;
 
@@ -79,9 +70,7 @@ function FavoriteToggle(props: FavoriteToggleProps) {
       <Button
         icon={<NotFavoriteIcon />}
         hoverIcon={<FavoriteIcon />}
-        compactStyle={compactStyle}
-        regularStyle={regularStyle}
-        minWidthToShowRegularLayout={minWidthToShowRegularLayout}
+        regularStyle={style}
       />
     );
   } else {
@@ -89,9 +78,7 @@ function FavoriteToggle(props: FavoriteToggleProps) {
       <Button
         icon={<FavoriteIcon />}
         hoverIcon={<NotFavoriteIcon />}
-        compactStyle={compactStyle}
-        regularStyle={regularStyle}
-        minWidthToShowRegularLayout={minWidthToShowRegularLayout}
+        regularStyle={style}
       />
     );
   }
