@@ -7,6 +7,7 @@ import Favorite from "icons/favorite-border.svg";
 import Menu from "icons/menu-book.svg";
 import Search from "icons/search.svg";
 import Logo from "logo.svg";
+import { useRouter } from "next/router";
 
 // Common button styles
 // =============================================================================
@@ -138,11 +139,25 @@ const StyledNav = styled.nav`
 `;
 
 function Nav() {
+  const router = useRouter();
+
+  const links = [
+    { href: "/recipes", label: "Recipes", icon: <Menu /> },
+    { href: "/favorites", label: "Favorites", icon: <Favorite /> },
+  ];
+
   return (
     <StyledNav>
       <NavLinkList>
-        <NavItem href="/" icon={<Menu />} label="Recipes" />
-        <NavItem href="/" icon={<Favorite />} label="Favorites" />
+        {links.map((link, index) => (
+          <NavItem
+            key={index}
+            href={link.href}
+            icon={link.icon}
+            label={link.label}
+            isActive={router.asPath.startsWith(link.href)}
+          />
+        ))}
       </NavLinkList>
     </StyledNav>
   );
