@@ -106,6 +106,8 @@ function NavItem({ href, icon, label, isActive = false }: NavItemProps) {
   if (isActive) {
     compactStyle.color = theme.colors.primary;
     regularStyle.color = theme.colors.primary;
+    compactStyle.hoverColor = theme.colors.textPrimary;
+    regularStyle.hoverColor = theme.colors.textPrimary;
   }
 
   return (
