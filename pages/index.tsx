@@ -91,9 +91,14 @@ const RecipeGroupLinkToMore = styled.a`
   align-self: flex-end;
   font-size: 1.7rem;
   line-height: 1em;
+  color: ${({ theme }) => theme.colors.textSecondary};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 2rem;
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.textSecondaryHover};
   }
 `;
 

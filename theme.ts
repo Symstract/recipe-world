@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
     textPrimary: "#1B1B1B",
     textPrimaryHover: "#505050",
     textSecondary: "rgba(0, 0, 0, 0.8)",
+    textSecondaryHover: "black",
   },
 
   fonts: {

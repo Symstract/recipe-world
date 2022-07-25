@@ -163,11 +163,11 @@ const RecipeButton = styled.button`
 
   &:hover {
     svg *:not([fill="none"]) {
-      fill: black;
+      fill: ${({ theme }) => theme.colors.textSecondaryHover};
     }
 
     span {
-      color: black;
+      color: ${({ theme }) => theme.colors.textSecondaryHover};
     }
   }
 
