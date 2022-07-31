@@ -1,14 +1,20 @@
-import { useRef, useState } from "react";
-import styled, { useTheme } from "styled-components";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
+import styled, { css, useTheme } from "styled-components";
 
+import { addOpacityToHexColor } from "lib/colorUtils";
 import { Button, ButtonStyle } from "components/Buttons";
 import SearchIcon from "icons/search.svg";
-import { addOpacityToHexColor } from "lib/colorUtils";
 
-const SearchInput = styled.input.attrs({
-  type: "search",
-  placeholder: "Search recipes",
-})`
+interface SearchInputProps {
+  searchStyle: "regular" | "navbar";
+}
+
+const searchInputStyleRegular = css<SearchInputProps>`
   width: 100%;
   border: none;
   background: none;
@@ -27,62 +33,132 @@ const SearchInput = styled.input.attrs({
   }
 `;
 
-const StyledSearch = styled.form<{ hasFocus: boolean }>`
+const searchInputStyleNavbar = css<SearchInputProps>`
+  font-size: inherit;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding-left: ${({ theme }) => theme.pageWidths.mobile.padding};
+  }
+`;
+
+const SearchInput = styled.input.attrs<SearchInputProps>({
+  type: "search",
+  placeholder: "Search recipes",
+})`
+  ${searchInputStyleRegular}
+  ${(props) => props.searchStyle === "navbar" && searchInputStyleNavbar};
+`;
+
+interface SearchButtonContainerProps {
+  searchStyle: "regular" | "navbar";
+}
+
+const SearchButtonContainer = styled.div<SearchButtonContainerProps>`
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: ${(props) => (props.searchStyle === "navbar" ? "none" : "block")};
+  }
+`;
+
+interface SearchProps {
+  searchStyle: "regular" | "navbar";
+  hasFocus: boolean;
+}
+
+const searchFormStyleRegular = css<SearchProps>`
   display: flex;
   width: 100%;
   max-width: 700px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: ${(props) =>
-    props.hasFocus
-      ? props.theme.colors.textPrimary
-      : addOpacityToHexColor(
-          props.theme.colors.textPrimary,
-          props.theme.inputInactiveOpacity
-        )};
+  border-bottom: 2px solid
+    ${(props) =>
+      props.hasFocus
+        ? props.theme.colors.textPrimary
+        : addOpacityToHexColor(
+            props.theme.colors.textPrimary,
+            props.theme.inputInactiveOpacity
+          )};
   line-height: 1em;
 `;
 
-export default function SearchField() {
-  const [hasFocus, setHasFocus] = useState(false);
-  const [hasInput, setHasInput] = useState(false);
+const searchFormStyleNavbar = css<SearchProps>`
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    border-bottom: none;
+    height: 100%;
+  }
+`;
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const theme = useTheme();
+const SearchForm = styled.form<SearchProps>`
+  ${searchFormStyleRegular}
+  ${(props) => props.searchStyle === "navbar" && searchFormStyleNavbar};
+`;
 
-  const handleFocus = () => {
-    setHasFocus(true);
-  };
-
-  const handleBlur = () => {
-    setHasFocus(false);
-  };
-
-  const handleInput = () => {
-    setHasInput(!!inputRef.current?.value.length);
-  };
-
-  const commonStyle: ButtonStyle = {
-    width: "4rem",
-    height: "4rem",
-    hoverColor: theme.colors.textPrimaryHover,
-  };
-
-  return (
-    <StyledSearch hasFocus={hasFocus}>
-      <SearchInput
-        ref={inputRef}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onInput={handleInput}
-      />
-      <Button
-        icon={<SearchIcon />}
-        minWidthToShowRegularLayout={theme.breakpoints.tablet}
-        compactStyle={{ iconSize: "2.4rem", ...commonStyle }}
-        regularStyle={{ iconSize: "2.8rem", ...commonStyle }}
-        aria-disabled={!hasInput}
-      />
-    </StyledSearch>
-  );
+interface SearchFieldProps {
+  searchStyle?: "regular" | "navbar";
+  onBlur?: (e: React.FocusEvent) => void;
 }
+
+export type SearchFieldHandle = {
+  focus: () => void;
+};
+
+const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
+  function SearchFieldToForward({ searchStyle = "regular", onBlur }, ref) {
+    const [hasFocus, setHasFocus] = useState(false);
+    const [hasInput, setHasInput] = useState(false);
+
+    const formRef = useRef<HTMLFormElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const theme = useTheme();
+
+    useImperativeHandle(ref, () => ({
+      focus: () => {
+        if (inputRef?.current) inputRef.current.focus();
+      },
+    }));
+
+    const handleFocus = () => {
+      setHasFocus(true);
+    };
+
+    const handleBlur = () => {
+      setHasFocus(false);
+    };
+
+    const handleInput = () => {
+      setHasInput(!!inputRef.current?.value.length);
+    };
+
+    const commonStyle: ButtonStyle = {
+      width: "4rem",
+      height: "4rem",
+      hoverColor: theme.colors.textPrimaryHover,
+    };
+
+    return (
+      <SearchForm
+        hasFocus={hasFocus}
+        searchStyle={searchStyle}
+        ref={formRef}
+        onBlur={onBlur}
+      >
+        <SearchInput
+          searchStyle={searchStyle}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onInput={handleInput}
+          ref={inputRef}
+        />
+        <SearchButtonContainer searchStyle={searchStyle}>
+          <Button
+            icon={<SearchIcon />}
+            minWidthToShowRegularLayout={theme.breakpoints.tablet}
+            compactStyle={{ iconSize: "2.4rem", ...commonStyle }}
+            regularStyle={{ iconSize: "2.8rem", ...commonStyle }}
+            aria-disabled={!hasInput}
+          />
+        </SearchButtonContainer>
+      </SearchForm>
+    );
+  }
+);
+
+export default SearchField;

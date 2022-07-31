@@ -1,13 +1,13 @@
 import Link from "next/link";
 import styled, { useTheme } from "styled-components";
 
-import { Button, ButtonStyle, LinkButton } from "components/Buttons";
+import { ButtonStyle, LinkButton } from "components/Buttons";
 import SectionContainer from "components/SectionContainer";
 import Favorite from "icons/favorite-border.svg";
 import Menu from "icons/menu-book.svg";
-import Search from "icons/search.svg";
 import Logo from "logo.svg";
 import { useRouter } from "next/router";
+import SearchFieldForNavbar from "./SearchFieldForNavbar";
 
 // Common button styles
 // =============================================================================
@@ -172,26 +172,6 @@ const NavAndSearch = styled.div`
   height: 100%;
 `;
 
-function SearchPlaceholder() {
-  const theme = useTheme();
-
-  return (
-    <Button
-      icon={<Search />}
-      compactStyle={{
-        hoverColor: theme.colors.textPrimaryHover,
-        ...buttonStyleCompactCommon,
-      }}
-      regularStyle={{
-        width: "5rem",
-        hoverColor: theme.colors.textPrimaryHover,
-        ...buttonStyleRegularCommon,
-      }}
-      minWidthToShowRegularLayout={theme.breakpoints.tablet}
-    />
-  );
-}
-
 const HeaderContent = styled.div`
   display: flex;
   align-items: center;
@@ -220,7 +200,13 @@ export default function Header() {
           <HomepageLink />
           <NavAndSearch>
             <Nav />
-            <SearchPlaceholder />
+            <SearchFieldForNavbar
+              buttonWidth={buttonStyleCompactCommon.width!}
+              iconSizes={{
+                mobile: buttonStyleCompactCommon.iconSize!,
+                tablet: buttonStyleRegularCommon.iconSize!,
+              }}
+            />
           </NavAndSearch>
         </HeaderContent>
       </SectionContainer>
