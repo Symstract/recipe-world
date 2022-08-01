@@ -172,14 +172,14 @@ const NavAndSearch = styled.div`
   height: 100%;
 `;
 
-const HeaderContent = styled.div`
+const NavbarContent = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
 `;
 
-const StyledHeader = styled.header`
+const StyledNavbar = styled.header`
   width: 100%;
   height: calc(5.4rem + 1px);
   border-bottom: 1px solid;
@@ -192,11 +192,11 @@ const StyledHeader = styled.header`
   }
 `;
 
-export default function Header() {
+export default function Navbar() {
   return (
-    <StyledHeader>
+    <StyledNavbar>
       <SectionContainer>
-        <HeaderContent>
+        <NavbarContent>
           <HomepageLink />
           <NavAndSearch>
             <Nav />
@@ -208,8 +208,8 @@ export default function Header() {
               }}
             />
           </NavAndSearch>
-        </HeaderContent>
+        </NavbarContent>
       </SectionContainer>
-    </StyledHeader>
+    </StyledNavbar>
   );
 }
