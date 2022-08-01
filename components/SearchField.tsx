@@ -12,6 +12,9 @@ import SearchIcon from "icons/search.svg";
 
 type SearchStyle = "regular" | "navbar";
 
+// Sub-components
+// =============================================================================
+
 interface SearchInputProps {
   searchStyle: SearchStyle;
 }
@@ -88,6 +91,9 @@ const SearchForm = styled.form<SearchProps>`
   ${searchFormStyleRegular}
   ${(props) => props.searchStyle === "navbar" && searchFormStyleNavbar};
 `;
+
+// Main component
+// =============================================================================
 
 interface SearchFieldProps {
   searchStyle?: SearchStyle;
