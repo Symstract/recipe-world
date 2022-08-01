@@ -10,8 +10,10 @@ import { addOpacityToHexColor } from "lib/colorUtils";
 import { Button, ButtonStyle } from "components/Buttons";
 import SearchIcon from "icons/search.svg";
 
+type SearchStyle = "regular" | "navbar";
+
 interface SearchInputProps {
-  searchStyle: "regular" | "navbar";
+  searchStyle: SearchStyle;
 }
 
 const searchInputStyleRegular = css<SearchInputProps>`
@@ -49,18 +51,14 @@ const SearchInput = styled.input.attrs<SearchInputProps>({
   ${(props) => props.searchStyle === "navbar" && searchInputStyleNavbar};
 `;
 
-interface SearchButtonContainerProps {
-  searchStyle: "regular" | "navbar";
-}
-
-const SearchButtonContainer = styled.div<SearchButtonContainerProps>`
+const SearchButtonContainer = styled.div<{ searchStyle: SearchStyle }>`
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     display: ${(props) => (props.searchStyle === "navbar" ? "none" : "block")};
   }
 `;
 
 interface SearchProps {
-  searchStyle: "regular" | "navbar";
+  searchStyle: SearchStyle;
   hasFocus: boolean;
 }
 
@@ -92,7 +90,7 @@ const SearchForm = styled.form<SearchProps>`
 `;
 
 interface SearchFieldProps {
-  searchStyle?: "regular" | "navbar";
+  searchStyle?: SearchStyle;
   onBlur?: (e: React.FocusEvent) => void;
 }
 
