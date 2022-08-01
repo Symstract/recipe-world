@@ -131,7 +131,7 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
       setHasInput(!!inputRef.current?.value.length);
     };
 
-    const commonStyle: ButtonStyle = {
+    const commonButtonStyle: ButtonStyle = {
       width: "4rem",
       height: "4rem",
       hoverColor: theme.colors.textPrimaryHover,
@@ -155,8 +155,8 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
           <Button
             icon={<SearchIcon />}
             minWidthToShowRegularLayout={theme.breakpoints.tablet}
-            compactStyle={{ iconSize: "2.4rem", ...commonStyle }}
-            regularStyle={{ iconSize: "2.8rem", ...commonStyle }}
+            compactStyle={{ iconSize: "2.4rem", ...commonButtonStyle }}
+            regularStyle={{ iconSize: "2.8rem", ...commonButtonStyle }}
             aria-disabled={!hasInput}
           />
         </SearchButtonContainer>
