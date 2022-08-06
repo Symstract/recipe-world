@@ -8,7 +8,6 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     min-height: 100vh;
-    font-size: 1.8rem;
   }
 
   * {
@@ -16,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: ${({ theme }) => theme.fonts.body};
+    font-size: 1.8rem;
     color: ${({ theme }) => theme.colors.textPrimary};
   }
 
@@ -63,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
       font-size: 2.8rem;
     }
 
-    body {
+    * {
       font-size: 1.8rem;
     }
   }
@@ -77,7 +77,7 @@ const GlobalStyles = createGlobalStyle`
       font-size: 3.2rem;
     }
 
-    body {
+    * {
       font-size: 1.9rem;
     }
   }
@@ -91,7 +91,7 @@ const GlobalStyles = createGlobalStyle`
       font-size: 1.8rem;
     }
 
-    body {
+    * {
       font-size: 1.2rem;
     }
   }
