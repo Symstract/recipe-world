@@ -5,6 +5,7 @@ const theme: DefaultTheme = {
     primary: "#2F5607",
     accent: "#64336C",
     surface: "#FCFFF5",
+    surfaceHighlight: "#E3D9E7",
     textPrimary: "#1B1B1B",
     textPrimaryHover: "#505050",
     textSecondary: "rgba(0, 0, 0, 0.8)",

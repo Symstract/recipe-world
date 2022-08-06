@@ -6,6 +6,7 @@ declare module "styled-components" {
       primary: string;
       accent: string;
       surface: string;
+      surfaceHighlight: string;
       textPrimary: string;
       textPrimaryHover: string;
       textSecondary: string;
