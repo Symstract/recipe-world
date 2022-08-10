@@ -1,9 +1,6 @@
 import type { AppProps } from "next/app";
 import styled, { ThemeProvider } from "styled-components";
 
-import "@fontsource/carlito";
-import "@fontsource/tienne";
-
 import GlobalStyles from "components/GlobalStyles";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";

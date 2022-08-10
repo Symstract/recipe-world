@@ -56,7 +56,7 @@ const ResultsTitleAndSettings = styled.div`
 
   & > span {
     font-family: ${({ theme }) => theme.fonts.heading};
-    font-size: 2rem;
+    font-size: 2.2rem;
     line-height: 1em;
     color: ${({ theme }) => theme.colors.primary};
   }

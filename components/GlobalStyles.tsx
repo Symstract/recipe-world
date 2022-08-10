@@ -16,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: ${({ theme }) => theme.fonts.body};
     font-size: 1.8rem;
+    line-height: ${({ theme }) => theme.bodyLineHeight};
     color: ${({ theme }) => theme.colors.textPrimary};
   }
 
@@ -40,11 +41,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
-    font-size: 3.2rem;
+    font-size: 3.3rem;
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 2.6rem;
   }
 
   input[type="search"]::-webkit-search-decoration,

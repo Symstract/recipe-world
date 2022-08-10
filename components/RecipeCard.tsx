@@ -22,11 +22,12 @@ const ImageContainer = styled.div`
 
 const Title = styled.div`
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
+  word-break: break-all;
   font-family: ${({ theme }) => theme.fonts.heading};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
 `;
 
@@ -88,8 +89,12 @@ function FavoriteToggle(props: FavoriteToggleProps) {
 
 const TitleAndFavoriteButton = styled.div`
   display: flex;
-  gap: 1.5em;
+  gap: 1.2rem;
   width: 100%;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 1.7rem;
+  }
 `;
 
 // Rating and time

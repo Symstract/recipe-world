@@ -13,8 +13,8 @@ const theme: DefaultTheme = {
   },
 
   fonts: {
-    heading: "'Tienne', sans-serif",
-    body: "'Carlito', sans-serif",
+    heading: "'Volkhov', serif",
+    body: "'Mukta', sans-serif",
   },
 
   breakpoints: {
@@ -39,6 +39,7 @@ const theme: DefaultTheme = {
     tablet: "7rem",
   },
 
+  bodyLineHeight: "1.5em",
   inputInactiveOpacity: 0.6,
   inputDisabledOpacity: 0.6,
 };

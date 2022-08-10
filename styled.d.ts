@@ -40,6 +40,7 @@ declare module "styled-components" {
       tablet: string;
     };
 
+    bodyLineHeight: string;
     inputInactiveOpacity: number;
     inputDisabledOpacity: nummber;
   }
