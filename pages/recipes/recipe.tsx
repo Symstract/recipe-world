@@ -284,6 +284,7 @@ const IngredientsAndInsctructions = styled.div`
     padding: 4rem 0;
 
     & > :first-child {
+      flex-shrink: 0;
       width: 500px;
       padding-right: 45px;
     }
