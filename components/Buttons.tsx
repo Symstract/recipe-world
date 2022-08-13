@@ -82,10 +82,10 @@ const style = css<CommonButtonProps>`
 
   ${(props) =>
     props.compactStyle?.hoverColor &&
-    css`
+    css<CommonButtonProps>`
       &:not(:disabled):not([aria-disabled="true"]):hover {
         svg *:not([fill="none"]) {
-          fill: ${(props) => props.compactStyle.hoverColor};
+          fill: ${(props) => props.compactStyle!.hoverColor};
         }
       }
     `}
@@ -115,15 +115,15 @@ const style = css<CommonButtonProps>`
 
     ${(props) =>
       props.regularStyle?.hoverColor &&
-      css`
+      css<CommonButtonProps>`
         &:not(:disabled):not([aria-disabled="true"]):hover {
           svg *:not([fill="none"]) {
-            fill: ${(props) => props.regularStyle.hoverColor};
+            fill: ${(props) => props.regularStyle!.hoverColor};
           }
 
           span {
             display: initial;
-            color: ${(props) => props.regularStyle.hoverColor};
+            color: ${(props) => props.regularStyle!.hoverColor};
           }
         }
       `}
