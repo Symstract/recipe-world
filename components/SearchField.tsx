@@ -264,7 +264,7 @@ export type SearchFieldHandle = {
 
 const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
   function SearchFieldToForward({ searchStyle = "regular", onBlur }, ref) {
-    const [hasFocus, setHasFocus] = useState(false);
+    const [hasFocus, setHasFocus] = useState<boolean>(false);
     const [nonAutocompletedInputValue, setNonAutocompletedInputValue] =
       useState<string>("");
     const [suggestions, setSuggestions] = useState<ISearchSuggestion[]>([]);
