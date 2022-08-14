@@ -80,8 +80,8 @@ const Recipes: NextPage = () => {
             </PageHeadingBlock>
           </HeadingSection>
         </PageHeadingSectionContainer>
+        <SearchSection />
       </main>
-      <SearchSection />
     </>
   );
 };
