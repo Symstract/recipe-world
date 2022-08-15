@@ -195,12 +195,7 @@ export default function RecipeCard({
       <StyledRecipeLink>
         <StyledRecipeCard>
           <ImageContainer>
-            <Image
-              src="https://spoonacular.com/recipeImages/579247-556x370.jpg"
-              alt=""
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={imageURL} alt="" layout="fill" objectFit="cover" />
           </ImageContainer>
           <TitleAndFavoriteButton>
             <Title>{title}</Title>

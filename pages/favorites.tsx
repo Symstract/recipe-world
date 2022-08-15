@@ -39,7 +39,7 @@ function FavoriteRecipes() {
     {
       id: 5682345,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "Pasta Bolognese",
       isFavorite: true,
       rating: 7.4,
@@ -48,7 +48,7 @@ function FavoriteRecipes() {
     {
       id: 123435466,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 6.7,
@@ -57,7 +57,7 @@ function FavoriteRecipes() {
     {
       id: 45712334566,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
       isFavorite: false,
       rating: 8.9,
@@ -66,7 +66,7 @@ function FavoriteRecipes() {
     {
       id: 2353463,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: true,
       rating: 3,
@@ -75,7 +75,7 @@ function FavoriteRecipes() {
     {
       id: 45672345,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 6.7,
@@ -84,7 +84,7 @@ function FavoriteRecipes() {
     {
       id: 672353456,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 9.79,

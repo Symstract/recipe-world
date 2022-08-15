@@ -144,7 +144,7 @@ function PopularRecipesSection() {
     {
       id: 23455456,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "Pasta Bolognese",
       isFavorite: true,
       rating: 7.4,
@@ -153,7 +153,7 @@ function PopularRecipesSection() {
     {
       id: 235256,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 6.7,
@@ -162,7 +162,7 @@ function PopularRecipesSection() {
     {
       id: 789345,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
       isFavorite: false,
       rating: 8.9,
@@ -171,7 +171,7 @@ function PopularRecipesSection() {
     {
       id: 2355673,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: true,
       rating: 3,
@@ -180,7 +180,7 @@ function PopularRecipesSection() {
     {
       id: 23467534,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 6.7,
@@ -189,7 +189,7 @@ function PopularRecipesSection() {
     {
       id: 3454573,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 9.79,
@@ -203,7 +203,7 @@ function PopularRecipesSection() {
         <RecipeGroup
           heading="Popular"
           recipeCardPropList={recipeCardPropList}
-          linkToMore="#"
+          linkToMore="https://spoonacular.com/recipeImages/579247-556x370.jpg"
           linkToMoreLabel="More Popular Recipes"
         />
       </SectionContainer>
@@ -217,7 +217,7 @@ function HealthyRecipesSection() {
     {
       id: 546257,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "Pasta Bolognese",
       isFavorite: true,
       rating: 7.4,
@@ -226,7 +226,7 @@ function HealthyRecipesSection() {
     {
       id: 6734523,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 6.7,
@@ -235,7 +235,7 @@ function HealthyRecipesSection() {
     {
       id: 8923445676,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
       isFavorite: false,
       rating: 8.9,
@@ -244,7 +244,7 @@ function HealthyRecipesSection() {
     {
       id: 34346456,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: true,
       rating: 3,
@@ -253,7 +253,7 @@ function HealthyRecipesSection() {
     {
       id: 233434232,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 6.7,
@@ -262,7 +262,7 @@ function HealthyRecipesSection() {
     {
       id: 73635345,
       href: "/",
-      imageURL: "#",
+      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
       title: "deodklgmoiergg",
       isFavorite: false,
       rating: 9.79,
@@ -276,7 +276,7 @@ function HealthyRecipesSection() {
         <RecipeGroup
           heading="Healthy"
           recipeCardPropList={recipeCardPropList}
-          linkToMore="#"
+          linkToMore="https://spoonacular.com/recipeImages/579247-556x370.jpg"
           linkToMoreLabel="More Healthy Recipes"
         />
       </SectionContainer>
