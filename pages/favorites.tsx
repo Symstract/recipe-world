@@ -37,7 +37,7 @@ function FavoriteRecipes() {
   // Initial test content
   const recipeCardPropList = [
     {
-      id: "sdgfjknergg",
+      id: 5682345,
       href: "/",
       imageURL: "#",
       title: "Pasta Bolognese",
@@ -46,7 +46,7 @@ function FavoriteRecipes() {
       timeInMinutes: 145,
     },
     {
-      id: "235dfsd",
+      id: 123435466,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -55,7 +55,7 @@ function FavoriteRecipes() {
       timeInMinutes: 45,
     },
     {
-      id: "23523df5",
+      id: 45712334566,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
@@ -64,7 +64,7 @@ function FavoriteRecipes() {
       timeInMinutes: 70,
     },
     {
-      id: "346fgg233",
+      id: 2353463,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -73,7 +73,7 @@ function FavoriteRecipes() {
       timeInMinutes: 25,
     },
     {
-      id: "sdg346fgdf",
+      id: 45672345,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -82,7 +82,7 @@ function FavoriteRecipes() {
       timeInMinutes: 110,
     },
     {
-      id: "75l7ifgn",
+      id: 672353456,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",

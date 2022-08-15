@@ -162,7 +162,7 @@ const StyledRecipeLink = styled.a`
 // =============================================================================
 
 export interface RecipeCardProps {
-  id: string;
+  id: number;
   href: string;
   imageURL: string;
   title: string;

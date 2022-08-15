@@ -79,7 +79,7 @@ export default function Search() {
   // Initial test content
   const recipeCardPropList = [
     {
-      id: "sdgfjknergg",
+      id: 3452352455,
       href: "/",
       imageURL: "#",
       title: "Pasta Bolognese",
@@ -88,7 +88,7 @@ export default function Search() {
       timeInMinutes: 145,
     },
     {
-      id: "235dfsd",
+      id: 67456345,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -97,7 +97,7 @@ export default function Search() {
       timeInMinutes: 45,
     },
     {
-      id: "23523df5",
+      id: 234357,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
@@ -106,7 +106,7 @@ export default function Search() {
       timeInMinutes: 70,
     },
     {
-      id: "346fgg233",
+      id: 4567235,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -115,7 +115,7 @@ export default function Search() {
       timeInMinutes: 25,
     },
     {
-      id: "sdg346fgdf",
+      id: 4573452,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -124,7 +124,7 @@ export default function Search() {
       timeInMinutes: 110,
     },
     {
-      id: "75l7ifgn",
+      id: 34634523,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",

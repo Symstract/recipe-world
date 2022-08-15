@@ -142,7 +142,7 @@ function PopularRecipesSection() {
   // Initial test content
   const recipeCardPropList = [
     {
-      id: "sdgfjknergg",
+      id: 23455456,
       href: "/",
       imageURL: "#",
       title: "Pasta Bolognese",
@@ -151,7 +151,7 @@ function PopularRecipesSection() {
       timeInMinutes: 145,
     },
     {
-      id: "235dfsd",
+      id: 235256,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -160,7 +160,7 @@ function PopularRecipesSection() {
       timeInMinutes: 45,
     },
     {
-      id: "23523df5",
+      id: 789345,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
@@ -169,7 +169,7 @@ function PopularRecipesSection() {
       timeInMinutes: 70,
     },
     {
-      id: "346fgg233",
+      id: 2355673,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -178,7 +178,7 @@ function PopularRecipesSection() {
       timeInMinutes: 25,
     },
     {
-      id: "sdg346fgdf",
+      id: 23467534,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -187,7 +187,7 @@ function PopularRecipesSection() {
       timeInMinutes: 110,
     },
     {
-      id: "75l7ifgn",
+      id: 3454573,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -215,7 +215,7 @@ function HealthyRecipesSection() {
   // Initial test content
   const recipeCardPropList = [
     {
-      id: "sdgfjknergg",
+      id: 546257,
       href: "/",
       imageURL: "#",
       title: "Pasta Bolognese",
@@ -224,7 +224,7 @@ function HealthyRecipesSection() {
       timeInMinutes: 145,
     },
     {
-      id: "235dfsd",
+      id: 6734523,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -233,7 +233,7 @@ function HealthyRecipesSection() {
       timeInMinutes: 45,
     },
     {
-      id: "23523df5",
+      id: 8923445676,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
@@ -242,7 +242,7 @@ function HealthyRecipesSection() {
       timeInMinutes: 70,
     },
     {
-      id: "346fgg233",
+      id: 34346456,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -251,7 +251,7 @@ function HealthyRecipesSection() {
       timeInMinutes: 25,
     },
     {
-      id: "sdg346fgdf",
+      id: 233434232,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
@@ -260,7 +260,7 @@ function HealthyRecipesSection() {
       timeInMinutes: 110,
     },
     {
-      id: "75l7ifgn",
+      id: 73635345,
       href: "/",
       imageURL: "#",
       title: "deodklgmoiergg",
