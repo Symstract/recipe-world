@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import RecipeCardList from "components/RecipeCardList";
 import SearchField from "components/SearchField";
 import SectionContainer from "components/SectionContainer";
 import NavigateNext from "icons/navigate-next.svg";
+import { getRecipeCardInfos } from "lib/requests";
 
 // Hero image and text
 // =============================================================================
@@ -61,7 +62,7 @@ function SearchSection() {
 // =============================================================================
 
 interface RecipeGroupProps {
-  recipeCardPropList: Array<RecipeCardProps>;
+  recipeCardPropList: RecipeCardProps[] | null;
   heading: string;
   linkToMore: string;
   linkToMoreLabel: string;
@@ -138,65 +139,11 @@ function RecipeGroup({
   );
 }
 
-function PopularRecipesSection() {
-  // Initial test content
-  const recipeCardPropList = [
-    {
-      id: 23455456,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "Pasta Bolognese",
-      isFavorite: true,
-      rating: 7.4,
-      timeInMinutes: 145,
-    },
-    {
-      id: 235256,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 6.7,
-      timeInMinutes: 45,
-    },
-    {
-      id: 789345,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
-      isFavorite: false,
-      rating: 8.9,
-      timeInMinutes: 70,
-    },
-    {
-      id: 2355673,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: true,
-      rating: 3,
-      timeInMinutes: 25,
-    },
-    {
-      id: 23467534,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 6.7,
-      timeInMinutes: 110,
-    },
-    {
-      id: 3454573,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 9.79,
-      timeInMinutes: 35,
-    },
-  ];
-
+function PopularRecipesSection({
+  recipeCardPropList,
+}: {
+  recipeCardPropList: RecipeCardProps[] | null;
+}) {
   return (
     <section>
       <SectionContainer>
@@ -211,65 +158,11 @@ function PopularRecipesSection() {
   );
 }
 
-function HealthyRecipesSection() {
-  // Initial test content
-  const recipeCardPropList = [
-    {
-      id: 546257,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "Pasta Bolognese",
-      isFavorite: true,
-      rating: 7.4,
-      timeInMinutes: 145,
-    },
-    {
-      id: 6734523,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 6.7,
-      timeInMinutes: 45,
-    },
-    {
-      id: 8923445676,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
-      isFavorite: false,
-      rating: 8.9,
-      timeInMinutes: 70,
-    },
-    {
-      id: 34346456,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: true,
-      rating: 3,
-      timeInMinutes: 25,
-    },
-    {
-      id: 233434232,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 6.7,
-      timeInMinutes: 110,
-    },
-    {
-      id: 73635345,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 9.79,
-      timeInMinutes: 35,
-    },
-  ];
-
+function HealthyRecipesSection({
+  recipeCardPropList,
+}: {
+  recipeCardPropList: RecipeCardProps[] | null;
+}) {
   return (
     <section>
       <SectionContainer>
@@ -287,7 +180,39 @@ function HealthyRecipesSection() {
 // Page
 // =============================================================================
 
-const Home: NextPage = () => {
+interface PageProps {
+  popularRecipes: RecipeCardProps[] | null;
+  healthyRecipes: RecipeCardProps[] | null;
+}
+
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
+  context
+) => {
+  const popularRes = await getRecipeCardInfos({
+    sort: "popularity",
+    number: 6,
+  });
+
+  if (popularRes.error) console.log(popularRes.error);
+
+  const healthyRes = await getRecipeCardInfos({
+    sort: "healthiness",
+    number: 6,
+  });
+
+  if (healthyRes.error) console.log(healthyRes.error);
+
+  const pageProps: PageProps = {
+    healthyRecipes: healthyRes.data,
+    popularRecipes: popularRes.data,
+  };
+
+  return {
+    props: { ...pageProps },
+  };
+};
+
+const Home: NextPage<PageProps> = ({ healthyRecipes, popularRecipes }) => {
   return (
     <>
       <Head>
@@ -302,8 +227,8 @@ const Home: NextPage = () => {
           </PageHeadingBlock>
         </HeroImage>
         <SearchSection />
-        <PopularRecipesSection />
-        <HealthyRecipesSection />
+        <PopularRecipesSection recipeCardPropList={popularRecipes} />
+        <HealthyRecipesSection recipeCardPropList={healthyRecipes} />
       </main>
     </>
   );
