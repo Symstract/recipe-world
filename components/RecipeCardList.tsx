@@ -3,7 +3,7 @@ import styled from "styled-components";
 import RecipeCard, { RecipeCardProps } from "components/RecipeCard";
 
 interface RecipeCardListProps {
-  recipeCardPropList: Array<RecipeCardProps>;
+  recipeCardPropList: RecipeCardProps[] | null;
 }
 
 const StyledRecipeCardList = styled.ul`
@@ -18,10 +18,16 @@ const StyledRecipeCardList = styled.ul`
   }
 `;
 
-export default function RecipeCardList(props: RecipeCardListProps) {
+export default function RecipeCardList({
+  recipeCardPropList,
+}: RecipeCardListProps) {
+  if (!recipeCardPropList) {
+    return <span>Something went wrong, recipes could not be loaded.</span>;
+  }
+
   return (
     <StyledRecipeCardList>
-      {props.recipeCardPropList.map((props) => (
+      {recipeCardPropList.map((props) => (
         <li key={props.id}>
           <RecipeCard {...props} />
         </li>
