@@ -56,7 +56,7 @@ const StyledRating = styled.div<RatingProps>`
 `;
 
 export default function Rating(props: RatingProps) {
-  const ratingScaled = Math.round(props.rating) / 2;
+  const ratingScaled = Math.round(props.rating) / 20;
   const fullStarCount = Math.floor(ratingScaled);
   const halfStarCount = fullStarCount - Math.ceil(ratingScaled);
 
