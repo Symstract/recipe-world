@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { RecipeCardProps } from "components/RecipeCard";
+import { RecipeCardInfo } from "lib/recipeTypes";
 import {
   SpoonacularComplexSearchResponse,
   SpoonacularComplexSearchSortingOptions,
@@ -34,7 +34,7 @@ export async function getRecipeCardInfos(params: {
   sort?: SpoonacularComplexSearchSortingOptions;
   number: number;
 }): Promise<{
-  data: RecipeCardProps[] | null;
+  data: RecipeCardInfo[] | null;
   error: any | null;
 }> {
   const { query = "", sort = "", number } = params;
@@ -59,7 +59,7 @@ export async function getRecipeCardInfos(params: {
     const resesInfoData: SpoonacularRecipeInformationBulkResponse =
       await resInfo.data;
 
-    const cardsInfo: RecipeCardProps[] = resesInfoData.map((re) => {
+    const cardsInfo: RecipeCardInfo[] = resesInfoData.map((re) => {
       return {
         id: re.id,
         href: `/recipes/${re.id}`,

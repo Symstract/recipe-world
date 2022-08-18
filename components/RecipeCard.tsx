@@ -7,6 +7,7 @@ import Rating from "components/Rating";
 import FavoriteIcon from "icons/favorite-filled.svg";
 import NotFavoriteIcon from "icons/favorite-border.svg";
 import Clock from "icons/schedule.svg";
+import { RecipeCardInfo } from "lib/recipeTypes";
 
 // Image
 // =============================================================================
@@ -161,15 +162,7 @@ const StyledRecipeLink = styled.a`
 // Recipe card
 // =============================================================================
 
-export interface RecipeCardProps {
-  id: number;
-  href: string;
-  imageURL: string;
-  title: string;
-  isFavorite: boolean;
-  rating: number;
-  timeInMinutes: number;
-}
+export interface RecipeCardProps extends RecipeCardInfo {}
 
 const StyledRecipeCard = styled.div`
   display: flex;
