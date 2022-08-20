@@ -34,7 +34,7 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
-  h1, h2 {
+  h1, h2, h3 {
     font-family: ${({ theme }) => theme.fonts.heading};
     color: ${({ theme }) => theme.colors.primary};
     font-weight: 700;
@@ -46,6 +46,10 @@ const GlobalStyles = createGlobalStyle`
 
   h2 {
     font-size: 2.6rem;
+  }
+
+  h3  {
+    font-size: 2.2rem;
   }
 
   input[type="search"]::-webkit-search-decoration,
@@ -64,6 +68,10 @@ const GlobalStyles = createGlobalStyle`
       font-size: 2.8rem;
     }
 
+    h3  {
+    font-size: 2.2rem;
+  }
+
     * {
       font-size: 1.8rem;
     }
@@ -78,6 +86,10 @@ const GlobalStyles = createGlobalStyle`
       font-size: 3.2rem;
     }
 
+    h3  {
+    font-size: 2.4rem;
+  }
+
     * {
       font-size: 1.9rem;
     }
@@ -90,6 +102,10 @@ const GlobalStyles = createGlobalStyle`
 
     h2 {
       font-size: 1.8rem;
+    }
+
+    h3  {
+    font-size: 1.4rem;
     }
 
     * {
