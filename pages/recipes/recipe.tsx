@@ -11,6 +11,7 @@ import NotFavorite from "icons/favorite-border.svg";
 import Print from "icons/print.svg";
 import Rating from "components/Rating";
 import SectionContainer from "components/SectionContainer";
+import { RecipeInstructionPartInfo } from "lib/recipeTypes";
 
 // Image
 // =============================================================================
@@ -367,16 +368,71 @@ const StyledInstructionList = styled.ol`
   }
 `;
 
-function InstructionList({ instructions }: { instructions: string[] }) {
+function InstructionList({ steps }: { steps: string[] }) {
   return (
     <StyledInstructionList>
-      {instructions.map((step, index) => (
+      {steps.map((step, index) => (
         <InstructionStep key={index}>
           <span>{`${index + 1}.`}</span>
           <span>{step}</span>
         </InstructionStep>
       ))}
     </StyledInstructionList>
+  );
+}
+
+const StyledInstructionPart = styled.li`
+  h3 {
+    margin-bottom: 2.2rem;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    h3 {
+      margin-bottom: 3rem;
+    }
+  }
+`;
+
+interface InstructionPartProps {
+  heading: string;
+  steps: string[];
+}
+
+function InstructionPart({ heading, steps }: InstructionPartProps) {
+  return (
+    <StyledInstructionPart>
+      {heading && <h3>{heading}</h3>}
+      <InstructionList steps={steps} />
+    </StyledInstructionPart>
+  );
+}
+
+const StyledInstructions = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 2.6rem;
+  width: 100%;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 2.8rem;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    gap: 3.6rem;
+  }
+`;
+
+function Instructions({
+  instructions,
+}: {
+  instructions: RecipeInstructionPartInfo[];
+}) {
+  return (
+    <StyledInstructions>
+      {instructions.map((part, index) => (
+        <InstructionPart key={index} heading={part.title} steps={part.steps} />
+      ))}
+    </StyledInstructions>
   );
 }
 
@@ -409,14 +465,31 @@ const Recipe: NextPage = () => {
     },
   ];
 
-  const instructions: string[] = [
-    "Peel and chop the onion.",
-    "sdfdrfg jkejtrmno kjdfmh sdgdfg.",
-    "dfgkmortihjf,g 4woidgfd w04ds ofkgh.",
-    "dfghkmolfkgh lfkdghmoierthm öfglhkmp 90 dflkgml jwkekf kmdfg pokero ldfgöl, mergl oimergiklm ldkmfg.",
-    "dfkjnk kjfdgnhkjnf ieorkgm kjldmfg dlkfg.",
-    "gdfsg ömjiqo jcsvoierjoij lkfgmhriunmd eriooemkcm, eoiroiergj iwekjdfg oieroeir.",
-    "fgioifdgh odkd lkdfg oierig kodfg.",
+  const instructions: RecipeInstructionPartInfo[] = [
+    {
+      title: "",
+      steps: [
+        "Peel and chop the onion.",
+        "sdfdrfg jkejtrmno kjdfmh sdgdfg.",
+        "dfgkmortihjf,g 4woidgfd w04ds ofkgh.",
+        "dfghkmolfkgh lfkdghmoierthm öfglhkmp 90 dflkgml jwkekf kmdfg pokero ldfgöl, mergl oimergiklm ldkmfg.",
+        "dfkjnk kjfdgnhkjnf ieorkgm kjldmfg dlkfg.",
+        "gdfsg ömjiqo jcsvoierjoij lkfgmhriunmd eriooemkcm, eoiroiergj iwekjdfg oieroeir.",
+        "fgioifdgh odkd lkdfg oierig kodfg.",
+      ],
+    },
+    {
+      title: "Sauce",
+      steps: [
+        "Peel and chop the onion.",
+        "sdfdrfg jkejtrmno kjdfmh sdgdfg.",
+        "dfgkmortihjf,g 4woidgfd w04ds ofkgh.",
+        "dfghkmolfkgh lfkdghmoierthm öfglhkmp 90 dflkgml jwkekf kmdfg pokero ldfgöl, mergl oimergiklm ldkmfg.",
+        "dfkjnk kjfdgnhkjnf ieorkgm kjldmfg dlkfg.",
+        "gdfsg ömjiqo jcsvoierjoij lkfgmhriunmd eriooemkcm, eoiroiergj iwekjdfg oieroeir.",
+        "fgioifdgh odkd lkdfg oierig kodfg.",
+      ],
+    },
   ];
 
   return (
@@ -460,7 +533,7 @@ const Recipe: NextPage = () => {
             </div>
             <div>
               <h2>Instructions</h2>
-              <InstructionList instructions={instructions} />
+              <Instructions instructions={instructions} />
             </div>
           </IngredientsAndInsctructions>
         </SectionContainer>

@@ -7,3 +7,8 @@ export interface RecipeCardInfo {
   rating: number;
   timeInMinutes: number;
 }
+
+export interface RecipeInstructionPartInfo {
+  title: string;
+  steps: string[];
+}
