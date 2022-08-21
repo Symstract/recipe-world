@@ -10,6 +10,31 @@ export interface SpoonacularComplexSearchResponse {
   totalResults: number;
 }
 
+export interface SpoonacularExtendedIngredient {
+  aisle: string;
+  amount: number;
+  consitency: string;
+  id: number;
+  image: string;
+  measures: {
+    metric: {
+      amount: number;
+      unitLong: string;
+      unitShort: string;
+    };
+    us: {
+      amount: number;
+      unitLong: string;
+      unitShort: string;
+    };
+  };
+  meta: any[];
+  name: string;
+  original: string;
+  originalName: string;
+  unit: string;
+}
+
 export interface SpoonacularRecipeInformationResponse {
   id: number;
   title: string;
@@ -45,30 +70,7 @@ export interface SpoonacularRecipeInformationResponse {
   whole30: boolean;
   weightWatcherSmartPoints: number;
   dishTypes: string[];
-  extendedIngredients: Array<{
-    aisle: string;
-    amount: number;
-    consitency: string;
-    id: number;
-    image: string;
-    measures: {
-      metric: {
-        amount: number;
-        unitLong: string;
-        unitShort: string;
-      };
-      us: {
-        amount: number;
-        unitLong: string;
-        unitShort: string;
-      };
-    };
-    meta: any[];
-    name: string;
-    original: string;
-    originalName: string;
-    unit: string;
-  }>;
+  extendedIngredients: SpoonacularExtendedIngredient[];
   summary: string;
   winePairing: {
     pairedWines: string[];
@@ -145,3 +147,32 @@ export type SpoonacularComplexSearchSortingOptions =
   | "vitamin-k"
   | "sugar"
   | "zinc";
+
+interface SpoonacularAnalyzedInstructionsPart {
+  name: string;
+  steps: Array<{
+    equipment:
+      | Array<{
+          id: number;
+          image: string;
+          name: string;
+          temperature?: {
+            number: number;
+            unit: string;
+          };
+        }>
+      | [];
+    ingredients:
+      | Array<{
+          id: number;
+          image: string;
+          name: string;
+        }>
+      | [];
+    number: number;
+    step: string;
+  }>;
+}
+
+export type SpoonacularAnalyzedInstructionsResponse =
+  SpoonacularAnalyzedInstructionsPart[];

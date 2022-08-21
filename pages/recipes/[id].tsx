@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
@@ -11,7 +11,12 @@ import NotFavorite from "icons/favorite-border.svg";
 import Print from "icons/print.svg";
 import Rating from "components/Rating";
 import SectionContainer from "components/SectionContainer";
-import { RecipeInstructionPartInfo } from "lib/recipeTypes";
+import {
+  IngredientInfo,
+  RecipeInfo,
+  RecipeInstructionPartInfo,
+} from "lib/recipeTypes";
+import { getRecipeInfo } from "lib/requests";
 
 // Image
 // =============================================================================
@@ -125,16 +130,40 @@ function TimeAndPortions({ timeInMinutes, portions }: TimeAndPortionsProps) {
 
 // === Rating and credits ===
 
+interface CreditsProps {
+  name: string;
+  url: string;
+}
+
+const StyledCredits = styled.div`
+  * {
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+function Credits({ name, url }: CreditsProps) {
+  if (!name && !url) {
+    return <span>By unknown</span>;
+  }
+
+  if (name && !url) {
+    return <span>By {name}</span>;
+  }
+
+  return (
+    <span>
+      By <a href={url}>{name}</a>
+    </span>
+  );
+}
+
 const RatingAndCredits = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
   width: 100%;
-
-  span {
-    color: ${({ theme }) => theme.colors.textSecondary};
-  }
 `;
+
+// === Description ===
 
 const Description = styled.span`
   align-self: flex-start;
@@ -305,24 +334,20 @@ const Ingredient = styled.li`
   }
 `;
 
-interface IIngredient {
-  name: string;
-  amount: number;
-  unit: string;
-}
-
 const StyledIngredientList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-function IngredientList({ ingredients }: { ingredients: IIngredient[] }) {
+function IngredientList({ ingredients }: { ingredients: IngredientInfo[] }) {
   return (
     <StyledIngredientList>
       {ingredients.map((ing, index) => (
         <Ingredient key={index}>
-          <span>{`${ing.amount} ${ing.unit}`}</span>
+          <span>
+            {ing.amount} {ing.unit}
+          </span>
           <span>{ing.name}</span>
         </Ingredient>
       ))}
@@ -439,69 +464,39 @@ function Instructions({
 // Page
 // =============================================================================
 
-const Recipe: NextPage = () => {
-  // Initial test data
+interface PageProps {
+  recipeInfo: RecipeInfo | null;
+}
 
-  const ingredients: IIngredient[] = [
-    {
-      name: "Pasta",
-      amount: 400,
-      unit: "g",
-    },
-    {
-      name: "Minced meat",
-      amount: 400,
-      unit: "g",
-    },
-    {
-      name: "Crushed Tomatoes",
-      amount: 4,
-      unit: "dl",
-    },
-    {
-      name: "Onion",
-      amount: 400,
-      unit: "",
-    },
-  ];
+const Recipe: NextPage<PageProps> = ({ recipeInfo }) => {
+  if (!recipeInfo) {
+    // Recipe not found
+    return <></>;
+  }
 
-  const instructions: RecipeInstructionPartInfo[] = [
-    {
-      title: "",
-      steps: [
-        "Peel and chop the onion.",
-        "sdfdrfg jkejtrmno kjdfmh sdgdfg.",
-        "dfgkmortihjf,g 4woidgfd w04ds ofkgh.",
-        "dfghkmolfkgh lfkdghmoierthm öfglhkmp 90 dflkgml jwkekf kmdfg pokero ldfgöl, mergl oimergiklm ldkmfg.",
-        "dfkjnk kjfdgnhkjnf ieorkgm kjldmfg dlkfg.",
-        "gdfsg ömjiqo jcsvoierjoij lkfgmhriunmd eriooemkcm, eoiroiergj iwekjdfg oieroeir.",
-        "fgioifdgh odkd lkdfg oierig kodfg.",
-      ],
-    },
-    {
-      title: "Sauce",
-      steps: [
-        "Peel and chop the onion.",
-        "sdfdrfg jkejtrmno kjdfmh sdgdfg.",
-        "dfgkmortihjf,g 4woidgfd w04ds ofkgh.",
-        "dfghkmolfkgh lfkdghmoierthm öfglhkmp 90 dflkgml jwkekf kmdfg pokero ldfgöl, mergl oimergiklm ldkmfg.",
-        "dfkjnk kjfdgnhkjnf ieorkgm kjldmfg dlkfg.",
-        "gdfsg ömjiqo jcsvoierjoij lkfgmhriunmd eriooemkcm, eoiroiergj iwekjdfg oieroeir.",
-        "fgioifdgh odkd lkdfg oierig kodfg.",
-      ],
-    },
-  ];
+  const {
+    credits,
+    description,
+    imageUrl,
+    ingredients,
+    instructions,
+    isFavorite,
+    portions,
+    rating,
+    timeInMinutes,
+    title,
+  } = recipeInfo;
 
   return (
     <>
       <Head>
-        <title>Recipe name here | Recipe World</title>
+        <title>{`${title} | Recipe World`}</title>
         <meta name="description" content="Recipe" />
       </Head>
       <main>
         <ImageContainer>
           <Image
-            src="https://spoonacular.com/recipeImages/579247-636x393.jpg"
+            src={imageUrl}
             alt=""
             layout="fill"
             objectFit="cover"
@@ -511,19 +506,19 @@ const Recipe: NextPage = () => {
         <SectionContainer>
           <RecipeInfoSection>
             <RecipeInfoContent>
-              <h1>Pasta Bolognese Super Extra Decicious</h1>
-              <TimeAndPortions timeInMinutes={110} portions={4} />
+              <h1>{title}</h1>
+              <TimeAndPortions
+                timeInMinutes={timeInMinutes}
+                portions={portions}
+              />
               <RatingAndCredits>
-                <Rating rating={5} size="large" />
-                <span>By some name here</span>
+                <Rating rating={rating} size="large" />
+                <Credits name={credits.name} url={credits.url} />
               </RatingAndCredits>
-              <Description>
-                sdflskdjf wefijkdhjf lökdfjgjeorigjo ldkfgj ier ldfkjgöier
-                dflgkjoi ksåtrhj ksdfgkdfjg dfgdgf rgergdfg rthfghfghb scsdgg
-                dfvdg wgerg ergergdfgdfg gdfgergefgdfg gfdgdgwre r dfgerergdfg
-                dfg erfghhghfg gdg ergergererggfdsfgdf.
-              </Description>
-              <ButtonSection isFavorite={true} />
+              <Description
+                dangerouslySetInnerHTML={{ __html: description }}
+              ></Description>
+              <ButtonSection isFavorite={isFavorite} />
             </RecipeInfoContent>
           </RecipeInfoSection>
           <IngredientsAndInsctructions>
@@ -540,6 +535,24 @@ const Recipe: NextPage = () => {
       </main>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
+  context
+) => {
+  const resInfo = await getRecipeInfo(+context.params!.id!);
+
+  if (resInfo.error) console.log(resInfo.error);
+
+  const resInfoData = resInfo.data;
+
+  if (!resInfoData) {
+    const pageProps: PageProps = { recipeInfo: null };
+    return { props: { ...pageProps } };
+  }
+
+  const pageProps: PageProps = { recipeInfo: resInfoData };
+  return { props: { ...pageProps } };
 };
 
 export default Recipe;
