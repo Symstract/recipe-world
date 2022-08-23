@@ -461,6 +461,25 @@ function Instructions({
   );
 }
 
+// Recipe not found
+// =============================================================================
+
+const RecipeNotFound = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 60px;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin-top: 90px;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin-top: 120px;
+  }
+`;
+
 // Page
 // =============================================================================
 
@@ -470,8 +489,13 @@ interface PageProps {
 
 const Recipe: NextPage<PageProps> = ({ recipeInfo }) => {
   if (!recipeInfo) {
-    // Recipe not found
-    return <></>;
+    return (
+      <SectionContainer>
+        <RecipeNotFound>
+          <h1>Recipe not found</h1>
+        </RecipeNotFound>
+      </SectionContainer>
+    );
   }
 
   const {
