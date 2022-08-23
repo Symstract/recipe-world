@@ -185,6 +185,28 @@ interface PageProps {
   healthyRecipes: RecipeCardProps[] | null;
 }
 
+const Home: NextPage<PageProps> = ({ healthyRecipes, popularRecipes }) => {
+  return (
+    <>
+      <Head>
+        <title>Recipe World</title>
+        <meta name="description" content="Find delicious recipes" />
+      </Head>
+      <main>
+        <HeroImage>
+          <Image src={heroImage} alt="" layout="fill" objectFit="cover" />
+          <PageHeadingBlock>
+            <h1>Let&apos;s cook!</h1>
+          </PageHeadingBlock>
+        </HeroImage>
+        <SearchSection />
+        <PopularRecipesSection recipeCardPropList={popularRecipes} />
+        <HealthyRecipesSection recipeCardPropList={healthyRecipes} />
+      </main>
+    </>
+  );
+};
+
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context
 ) => {
@@ -210,28 +232,6 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   return {
     props: { ...pageProps },
   };
-};
-
-const Home: NextPage<PageProps> = ({ healthyRecipes, popularRecipes }) => {
-  return (
-    <>
-      <Head>
-        <title>Recipe World</title>
-        <meta name="description" content="Find delicious recipes" />
-      </Head>
-      <main>
-        <HeroImage>
-          <Image src={heroImage} alt="" layout="fill" objectFit="cover" />
-          <PageHeadingBlock>
-            <h1>Let&apos;s cook!</h1>
-          </PageHeadingBlock>
-        </HeroImage>
-        <SearchSection />
-        <PopularRecipesSection recipeCardPropList={popularRecipes} />
-        <HealthyRecipesSection recipeCardPropList={healthyRecipes} />
-      </main>
-    </>
-  );
 };
 
 export default Home;
