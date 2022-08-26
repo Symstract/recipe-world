@@ -11,7 +11,7 @@ const PageHeadingBlock = styled.div`
     line-height: 1em;
   }
 
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: 10px 40px;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
