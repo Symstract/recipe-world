@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import RecipeCard, { RecipeCardProps } from "components/RecipeCard";
 import Spinner from "components/Spinner";
+import { useEffect, useRef } from "react";
 
 const tabletBreakpoint = "900px";
 
@@ -25,6 +26,7 @@ const SpinnerContainer = styled.div`
 interface RecipeCardListProps {
   recipeCardPropList: RecipeCardProps[] | null;
   isLoading?: boolean;
+  onListEndIntersection?: () => void;
 }
 
 const StyledRecipeCardList = styled.ul`
@@ -42,7 +44,30 @@ const StyledRecipeCardList = styled.ul`
 export default function RecipeCardList({
   recipeCardPropList,
   isLoading = false,
+  onListEndIntersection,
 }: RecipeCardListProps) {
+  const intersectionElemRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!onListEndIntersection || !intersectionElemRef.current || isLoading) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          onListEndIntersection();
+        }
+      },
+      {
+        rootMargin: "0px 0px 400px 0px",
+      }
+    );
+    observer.observe(intersectionElemRef.current);
+
+    return () => observer.disconnect();
+  });
+
   if (!recipeCardPropList) {
     return <span>Something went wrong, recipes could not be loaded.</span>;
   }
@@ -50,12 +75,14 @@ export default function RecipeCardList({
   return (
     <RecipeCardListAndSpinner>
       <StyledRecipeCardList>
-        {recipeCardPropList.map((props) => (
-          <li key={props.id}>
-            <RecipeCard {...props} />
-          </li>
-        ))}
+        {recipeCardPropList.length > 0 &&
+          recipeCardPropList.map((props) => (
+            <li key={props.id}>
+              <RecipeCard {...props} />
+            </li>
+          ))}
       </StyledRecipeCardList>
+      <div ref={intersectionElemRef}></div>
       {isLoading && (
         <SpinnerContainer>
           <Spinner />
