@@ -13,6 +13,7 @@ import styled, { css, useTheme } from "styled-components";
 import { addOpacityToHexColor } from "lib/colorUtils";
 import { Button, ButtonStyle } from "components/Buttons";
 import SearchIcon from "icons/search.svg";
+import { useRouter } from "next/router";
 
 type SearchStyle = "regular" | "navbar";
 
@@ -99,7 +100,7 @@ const SearchForm = styled.form<SearchProps>`
 // === Search suggestions ===
 
 interface ISearchSuggestion {
-  suggestionId: string;
+  suggestionId: number;
   suggestionPhrase: string;
 }
 
@@ -139,7 +140,6 @@ interface SearchSuggestionListProps {
   setSuggestions: React.Dispatch<React.SetStateAction<ISearchSuggestion[]>>;
   highlightedIndex: number | null;
   setHighlightedIndex: React.Dispatch<React.SetStateAction<number | null>>;
-  onClick: () => void;
   formRef: React.RefObject<HTMLFormElement>;
 }
 
@@ -160,7 +160,6 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
   const {
     searchStyle,
     formRef,
-    onClick,
     searchPhrase,
     highlightedIndex,
     setHighlightedIndex,
@@ -171,10 +170,10 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
   // Intial test data
   const suggestions_: ISearchSuggestion[] = useMemo(() => {
     return [
-      { suggestionId: "df3aef", suggestionPhrase: "dgdfdfg" },
-      { suggestionId: "dfa", suggestionPhrase: "dgdfdfg sdfwe" },
-      { suggestionId: "dffgncv", suggestionPhrase: "dgdfdfg er5yfbg" },
-      { suggestionId: "4tdfgfg", suggestionPhrase: "dgdfdfg sdae sdfsf" },
+      { suggestionId: 715424, suggestionPhrase: "dgdfdfg" },
+      { suggestionId: 715423, suggestionPhrase: "dgdfdfg sdfwe" },
+      { suggestionId: 715422, suggestionPhrase: "dgdfdfg er5yfbg" },
+      { suggestionId: 715421, suggestionPhrase: "dgdfdfg sdae sdfsf" },
     ];
   }, []);
 
@@ -183,6 +182,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
     setSuggestions(suggestions_);
   }, [searchPhrase, setSuggestions, suggestions_]);
 
+  const router = useRouter();
   const theme = useTheme();
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -214,6 +214,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
     return () => window.removeEventListener("resize", setStyle);
   });
 
+  const handleClick = (id: number) => router.push(`/recipes/${id}`);
   const handlePointerMove = (e: React.PointerEvent<HTMLLIElement>) => {
     const items = Array.from(e.currentTarget.parentElement!.children);
     const index = items.findIndex((elem) => elem === e.currentTarget);
@@ -233,11 +234,12 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
           onPointerLeave={handlePointerLeave}
         >
           <SearchSuggestion
+            onPointerDown={(e: React.PointerEvent) => e.preventDefault()}
+            onClick={(e: React.MouseEvent) => handleClick(su.suggestionId)}
             searchStyle={searchStyle}
             suggestionId={su.suggestionId}
             suggestionPhrase={su.suggestionPhrase}
             isHighlighted={index === highlightedIndex}
-            onClick={onClick}
           />
         </li>
       ))}
@@ -273,6 +275,7 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
 
     const formRef = useRef<HTMLFormElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const router = useRouter();
     const theme = useTheme();
 
     useImperativeHandle(ref, () => ({
@@ -355,6 +358,30 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
       }
     };
 
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (!nonAutocompletedInputValue) {
+        return;
+      }
+
+      if (highlightedSuggestionIndex !== null) {
+        router.push(
+          `/recipes/${suggestions[highlightedSuggestionIndex].suggestionId}`
+        );
+        return;
+      }
+
+      router.push(
+        {
+          pathname: "/recipes",
+          query: { query: nonAutocompletedInputValue },
+        },
+        undefined,
+        { shallow: true }
+      );
+    };
+
     const commonButtonStyle: ButtonStyle = {
       width: "4rem",
       height: "4rem",
@@ -366,6 +393,7 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
         hasFocus={hasFocus}
         searchStyle={searchStyle}
         ref={formRef}
+        onSubmit={handleSubmit}
         onBlur={onBlur}
       >
         <SearchInput
@@ -378,6 +406,7 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
         />
         <SearchButtonContainer searchStyle={searchStyle}>
           <Button
+            type="submit"
             icon={<SearchIcon />}
             minWidthToShowRegularLayout={theme.breakpoints.tablet}
             compactStyle={{ iconSize: "2.4rem", ...commonButtonStyle }}
@@ -390,7 +419,6 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
             searchStyle={searchStyle}
             formRef={formRef}
             searchPhrase={nonAutocompletedInputValue}
-            onClick={() => {}}
             highlightedIndex={highlightedSuggestionIndex}
             setHighlightedIndex={setHighlightedSuggestionIndex}
             suggestions={suggestions}

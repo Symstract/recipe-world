@@ -1,8 +1,12 @@
+import axios from "axios";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import SortIcon from "icons/sort.svg";
 import RecipeCardList from "components/RecipeCardList";
 import SearchField from "components/SearchField";
+import { useState, useEffect, useCallback } from "react";
+import { RecipeCardProps } from "./RecipeCard";
 
 const SearchFieldContainer = styled.section`
   display: flex;
@@ -76,63 +80,57 @@ const ResultsTitleAndSettings = styled.div`
 `;
 
 export default function Search() {
-  // Initial test content
-  const recipeCardPropList = [
-    {
-      id: 3452352455,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "Pasta Bolognese",
-      isFavorite: true,
-      rating: 7.4,
-      timeInMinutes: 145,
-    },
-    {
-      id: 67456345,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 6.7,
-      timeInMinutes: 45,
-    },
-    {
-      id: 234357,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg asdfsdfsdfswef sdfwsedsf ewsfwseswf sfesdf",
-      isFavorite: false,
-      rating: 8.9,
-      timeInMinutes: 70,
-    },
-    {
-      id: 4567235,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: true,
-      rating: 3,
-      timeInMinutes: 25,
-    },
-    {
-      id: 4573452,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 6.7,
-      timeInMinutes: 110,
-    },
-    {
-      id: 34634523,
-      href: "/",
-      imageURL: "https://spoonacular.com/recipeImages/579247-556x370.jpg",
-      title: "deodklgmoiergg",
-      isFavorite: false,
-      rating: 9.79,
-      timeInMinutes: 35,
-    },
-  ];
+  const [totalResultCount, setTotalResultCount] = useState<number | null>(null);
+  const [results, setResults] = useState<RecipeCardProps[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const fetchRecipes = useCallback(async () => {
+    if (
+      !router.isReady ||
+      (totalResultCount !== null && results.length === totalResultCount)
+    ) {
+      return;
+    }
+
+    try {
+      const { query, sort } = router.query;
+
+      setIsLoading(true);
+
+      const res = await axios("/api/recipes", {
+        params: { query, sort, offset: results.length },
+      });
+      const resData = await res.data;
+
+      if (resData.error) {
+        // TODO: show something to the user?
+        return;
+      }
+
+      setIsLoading(false);
+
+      setResults(results.concat(resData.data.cardsInfo));
+      setTotalResultCount(resData.data.totalRecipesFoundCount);
+    } catch (error) {
+      // TODO: show something
+    }
+  }, [results, router.isReady, router.query, totalResultCount]);
+
+  useEffect(() => {
+    setIsLoading(false);
+    setResults([]);
+    setTotalResultCount(null);
+  }, [router]);
+
+  let resultsText;
+
+  if (router.query.query) {
+    resultsText = `Showing ${totalResultCount} results for "${router.query.query}"`;
+  } else {
+    resultsText = `Showing All ${totalResultCount} recipes`;
+  }
 
   return (
     <>
@@ -140,10 +138,14 @@ export default function Search() {
         <SearchField />
       </SearchFieldContainer>
       <ResultsTitleAndSettings>
-        <span>Showing All Recipes</span>
+        <span>{resultsText}</span>
         <Sorting />
       </ResultsTitleAndSettings>
-      <RecipeCardList recipeCardPropList={recipeCardPropList} />
+      <RecipeCardList
+        recipeCardPropList={results}
+        isLoading={isLoading}
+        onListEndIntersection={fetchRecipes}
+      />
     </>
   );
 }

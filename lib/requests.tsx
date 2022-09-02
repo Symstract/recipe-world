@@ -102,17 +102,24 @@ export async function getRecipeInfo(recipeId: number): Promise<{
   }
 }
 
+interface GetRecipeCardInfosData {
+  cardsInfo: RecipeCardInfo[];
+  totalRecipesFoundCount: number;
+}
+
 export async function getRecipeCardInfos(params: {
   /**Default: "" */
   query?: string;
   /**Default: "" */
   sort?: SpoonacularComplexSearchSortingOptions;
   number: number;
+  /**Default: 0 */
+  offset?: number;
 }): Promise<{
-  data: RecipeCardInfo[] | null;
+  data: GetRecipeCardInfosData | null;
   error: any | null;
 }> {
-  const { query = "", sort = "", number } = params;
+  const { query = "", sort = "", number, offset = 0 } = params;
 
   try {
     const res = await axiosSpoonacular.get("/complexSearch?", {
@@ -120,6 +127,7 @@ export async function getRecipeCardInfos(params: {
         query,
         sort,
         number,
+        offset,
       },
     });
 
@@ -147,7 +155,11 @@ export async function getRecipeCardInfos(params: {
         title: re.title,
       };
     });
-    return { data: cardsInfo, error: null };
+
+    return {
+      data: { cardsInfo, totalRecipesFoundCount: resData.totalResults },
+      error: null,
+    };
   } catch (error) {
     return { data: null, error };
   }

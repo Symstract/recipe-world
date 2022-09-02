@@ -225,8 +225,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   if (healthyRes.error) console.log(healthyRes.error);
 
   const pageProps: PageProps = {
-    healthyRecipes: healthyRes.data,
-    popularRecipes: popularRes.data,
+    healthyRecipes: healthyRes.data?.cardsInfo || null,
+    popularRecipes: popularRes.data?.cardsInfo || null,
   };
 
   return {
