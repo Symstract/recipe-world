@@ -295,6 +295,10 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
       },
     }));
 
+    useEffect(() => {
+      if (searchStyle === "navbar") setNonAutocompletedInputValue("");
+    }, [router, searchStyle]);
+
     const handleFocus = () => {
       setHasFocus(true);
     };
