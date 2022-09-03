@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-  }, [router.pathname]);
+  }, [router.asPath]);
 
   return (
     <ThemeProvider theme={theme}>
