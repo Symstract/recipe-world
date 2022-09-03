@@ -91,8 +91,15 @@ export default function Search() {
     setIsLoading(false);
     setResults([]);
     setTotalResultCount(null);
-    inputRef.current?.focus();
   }, [router]);
+
+  useEffect(
+    () => {
+      if (!router.query.query) inputRef.current?.focus();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const fetchRecipes = useCallback(async () => {
     if (

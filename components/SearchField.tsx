@@ -299,6 +299,18 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
       if (searchStyle === "navbar") setNonAutocompletedInputValue("");
     }, [router, searchStyle]);
 
+    useEffect(() => {
+      const query = router.query.query;
+
+      if (
+        searchStyle === "regular" &&
+        router.pathname.startsWith("/recipes") &&
+        query
+      ) {
+        setNonAutocompletedInputValue(Array.isArray(query) ? query[0] : query);
+      }
+    }, [router, searchStyle]);
+
     const handleFocus = () => {
       setHasFocus(true);
     };
