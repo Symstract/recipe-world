@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 import SortIcon from "icons/sort.svg";
 import RecipeCardList from "components/RecipeCardList";
-import SearchField from "components/SearchField";
-import { useState, useEffect, useCallback } from "react";
+import SearchField, { SearchFieldHandle } from "components/SearchField";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { RecipeCardProps } from "./RecipeCard";
 
 const SearchFieldContainer = styled.section`
@@ -85,6 +85,14 @@ export default function Search() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
+  const inputRef = useRef<SearchFieldHandle>(null);
+
+  useEffect(() => {
+    setIsLoading(false);
+    setResults([]);
+    setTotalResultCount(null);
+    inputRef.current?.focus();
+  }, [router]);
 
   const fetchRecipes = useCallback(async () => {
     if (
@@ -118,12 +126,6 @@ export default function Search() {
     }
   }, [results, router.isReady, router.query, totalResultCount]);
 
-  useEffect(() => {
-    setIsLoading(false);
-    setResults([]);
-    setTotalResultCount(null);
-  }, [router]);
-
   let resultsText;
 
   if (router.query.query) {
@@ -135,7 +137,7 @@ export default function Search() {
   return (
     <>
       <SearchFieldContainer>
-        <SearchField />
+        <SearchField ref={inputRef} />
       </SearchFieldContainer>
       <ResultsTitleAndSettings>
         <span>{resultsText}</span>
