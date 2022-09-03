@@ -272,6 +272,17 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
     const [suggestions, setSuggestions] = useState<ISearchSuggestion[]>([]);
     const [highlightedSuggestionIndex, setHighlightedSuggestionIndex] =
       useState<number | null>(null);
+    const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<
+      number | null
+    >(null);
+
+    let finalInputValue;
+
+    if (selectedSuggestionIndex !== null) {
+      finalInputValue = suggestions[selectedSuggestionIndex].suggestionPhrase;
+    } else {
+      finalInputValue = nonAutocompletedInputValue;
+    }
 
     const formRef = useRef<HTMLFormElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -291,61 +302,47 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
     const handleBlur = () => {
       setHasFocus(false);
       setHighlightedSuggestionIndex(null);
+      setSelectedSuggestionIndex(null);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setNonAutocompletedInputValue(e.target.value);
       setHighlightedSuggestionIndex(null);
+      setSelectedSuggestionIndex(null);
     };
 
     const selectNextSuggestion = () => {
       if (highlightedSuggestionIndex === null) {
         setHighlightedSuggestionIndex(0);
-        if (inputRef.current) {
-          inputRef.current.value = suggestions[0].suggestionPhrase;
-        }
+        setSelectedSuggestionIndex(0);
         return;
       }
 
       if (highlightedSuggestionIndex === suggestions.length - 1) {
         setHighlightedSuggestionIndex(null);
-        if (inputRef.current) {
-          inputRef.current.value = nonAutocompletedInputValue;
-        }
+        setSelectedSuggestionIndex(null);
         return;
       }
 
       setHighlightedSuggestionIndex(highlightedSuggestionIndex + 1);
-      if (inputRef.current) {
-        inputRef.current.value =
-          suggestions[highlightedSuggestionIndex + 1].suggestionPhrase;
-      }
+      setSelectedSuggestionIndex(highlightedSuggestionIndex + 1);
     };
 
     const selectPreviousSuggestion = () => {
       if (highlightedSuggestionIndex === null) {
         setHighlightedSuggestionIndex(suggestions.length - 1);
-        if (inputRef.current) {
-          inputRef.current.value =
-            suggestions[suggestions.length - 1].suggestionPhrase;
-        }
-
+        setSelectedSuggestionIndex(suggestions.length - 1);
         return;
       }
 
       if (highlightedSuggestionIndex === 0) {
         setHighlightedSuggestionIndex(null);
-        if (inputRef.current) {
-          inputRef.current.value = nonAutocompletedInputValue;
-        }
+        setSelectedSuggestionIndex(null);
         return;
       }
 
       setHighlightedSuggestionIndex(highlightedSuggestionIndex - 1);
-      if (inputRef.current) {
-        inputRef.current.value =
-          suggestions[highlightedSuggestionIndex - 1].suggestionPhrase;
-      }
+      setSelectedSuggestionIndex(highlightedSuggestionIndex - 1);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -365,9 +362,9 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
         return;
       }
 
-      if (highlightedSuggestionIndex !== null) {
+      if (selectedSuggestionIndex !== null) {
         router.push(
-          `/recipes/${suggestions[highlightedSuggestionIndex].suggestionId}`
+          `/recipes/${suggestions[selectedSuggestionIndex].suggestionId}`
         );
         return;
       }
@@ -397,6 +394,7 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
         onBlur={onBlur}
       >
         <SearchInput
+          value={finalInputValue}
           searchStyle={searchStyle}
           onFocus={handleFocus}
           onBlur={handleBlur}
