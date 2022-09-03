@@ -5,6 +5,8 @@ import GlobalStyles from "components/GlobalStyles";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 import theme from "theme";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const PageContainer = styled.div`
   position: relative;
@@ -20,6 +22,14 @@ const PageContent = styled.div`
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  }, [router.pathname]);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
