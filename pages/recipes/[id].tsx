@@ -149,6 +149,14 @@ function Credits({ name, url }: CreditsProps) {
     return <span>By {name}</span>;
   }
 
+  if (!name && url) {
+    return (
+      <span>
+        By <a href={url}>{url}</a>
+      </span>
+    );
+  }
+
   return (
     <span>
       By <a href={url}>{name}</a>
