@@ -30,32 +30,59 @@ axiosSpoonacular.interceptors.response.use((response) => {
   return response;
 });
 
+function roundToNearestQuarter(amount: number) {
+  if (amount < 0.25) return 0.25;
+  return Math.round(amount / 0.25) * 0.25;
+}
+
+function roundToNearestHalf(amount: number) {
+  if (amount < 0.5) return 0.5;
+  return Math.round(amount / 0.5) * 0.5;
+}
+
+function correctAmountAndUnit(
+  amount: number,
+  unit: string
+): [number | null, string] {
+  // Amount is rounded to the nearest quarter so it looks nicer.
+
+  const unitLower = unit.toLowerCase();
+
+  switch (unitLower) {
+    case "ml":
+      return [roundToNearestQuarter(amount / 1000), "dl"];
+    case "g":
+      return [roundToNearestQuarter(amount), unitLower];
+    case "kgs":
+      return [roundToNearestQuarter(amount / 1000), "kg"];
+    case "tsp":
+    case "tsps":
+      return [roundToNearestHalf(amount), "tsp"];
+    case "tbsp":
+    case "tbsps":
+      return [roundToNearestHalf(amount), "tbsp"];
+    case "serving":
+    case "servings":
+      return [null, ""];
+  }
+
+  return [roundToNearestQuarter(amount / 1000), unitLower];
+}
+
 function adaptSpoonacularIngredients(
   spoonacularIngredients: SpoonacularExtendedIngredient[]
 ) {
   return spoonacularIngredients.map((ing) => {
-    const unitShort = ing.measures.metric.unitShort;
-
-    let amount;
-
-    if (unitShort == "g") {
-      amount = Math.round(ing.measures.metric.amount);
-    } else {
-      amount = Math.fround(ing.measures.metric.amount);
-    }
-
-    if (unitShort == "serving") {
-      return {
-        name: ing.name,
-        amount: null,
-        unit: "",
-      };
-    }
+    const metricMeasures = ing.measures.metric;
+    const [amount, unit] = correctAmountAndUnit(
+      metricMeasures.amount,
+      metricMeasures.unitShort
+    );
 
     return {
       name: ing.name,
       amount: amount,
-      unit: unitShort,
+      unit: unit,
     };
   });
 }
@@ -95,6 +122,8 @@ export async function getRecipeInfo(recipeId: number): Promise<{
       timeInMinutes: resInfoData.readyInMinutes,
       title: resInfoData.title,
     };
+
+    console.log(resInfoWithInstructions);
 
     return { data: resInfoWithInstructions, error: null };
   } catch (error) {
