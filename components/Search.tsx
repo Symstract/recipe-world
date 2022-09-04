@@ -146,10 +146,12 @@ export default function Search() {
       <SearchFieldContainer>
         <SearchField ref={inputRef} />
       </SearchFieldContainer>
-      <ResultsTitleAndSettings>
-        <span>{resultsText}</span>
-        <Sorting />
-      </ResultsTitleAndSettings>
+      {!isLoading && (
+        <ResultsTitleAndSettings>
+          <span>{resultsText}</span>
+          <Sorting />
+        </ResultsTitleAndSettings>
+      )}
       <RecipeCardList
         recipeCardPropList={results}
         isLoading={isLoading}
