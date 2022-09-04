@@ -339,7 +339,7 @@ const IngredientsAndInsctructions = styled.div`
 const Ingredient = styled.li`
   & > :first-child {
     display: inline-block;
-    width: 8rem;
+    width: 11rem;
   }
 `;
 
