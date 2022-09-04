@@ -303,11 +303,16 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
       const query = router.query.query;
 
       if (
-        searchStyle === "regular" &&
-        router.pathname.startsWith("/recipes") &&
-        query
+        searchStyle !== "regular" ||
+        !router.pathname.startsWith("/recipes")
       ) {
+        return;
+      }
+
+      if (query) {
         setNonAutocompletedInputValue(Array.isArray(query) ? query[0] : query);
+      } else {
+        setNonAutocompletedInputValue("");
       }
     }, [router, searchStyle]);
 
