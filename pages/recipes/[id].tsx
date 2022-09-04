@@ -140,28 +140,29 @@ const StyledCredits = styled.div`
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 `;
+
 function Credits({ name, url }: CreditsProps) {
+  let content;
+
   if (!name && !url) {
-    return <span>By unknown</span>;
-  }
-
-  if (name && !url) {
-    return <span>By {name}</span>;
-  }
-
-  if (!name && url) {
-    return (
+    content = <span>By unknown</span>;
+  } else if (name && !url) {
+    content = <span>By {name}</span>;
+  } else if (!name && url) {
+    content = (
       <span>
         By <a href={url}>{url}</a>
       </span>
     );
+  } else {
+    content = (
+      <span>
+        By <a href={url}>{name}</a>
+      </span>
+    );
   }
 
-  return (
-    <span>
-      By <a href={url}>{name}</a>
-    </span>
-  );
+  return <StyledCredits>{content}</StyledCredits>;
 }
 
 const RatingAndCredits = styled.div`
