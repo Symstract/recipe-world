@@ -52,9 +52,10 @@ function correctAmountAndUnit(
     case "ml":
       return [roundToNearestQuarter(amount / 1000), "dl"];
     case "g":
-      return [roundToNearestQuarter(amount), unitLower];
+      return [Math.round(amount / 25) * 25, "g"];
+    case "kg":
     case "kgs":
-      return [roundToNearestQuarter(amount / 1000), "kg"];
+      return [roundToNearestQuarter(amount), "kg"];
     case "tsp":
     case "tsps":
       return [roundToNearestHalf(amount), "tsp"];
