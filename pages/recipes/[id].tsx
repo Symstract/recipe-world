@@ -336,12 +336,43 @@ const IngredientsAndInsctructions = styled.div`
 
 // === Ingredients ===
 
-const Ingredient = styled.li`
-  & > :first-child {
-    display: inline-block;
-    width: 11rem;
-  }
+interface AmountAndUnitProps {
+  amount: number | null;
+  unit: string;
+}
+
+const StyledAmountAndUnit = styled.span`
+  display: inline-block;
+  width: 11rem;
 `;
+
+function AmountAndUnit({ amount, unit }: AmountAndUnitProps) {
+  // It's assumed that the amount is divisible by 0.25.
+
+  let wholeNumber;
+  let fractionCode = null;
+
+  if (!amount || Number.isInteger(amount)) {
+    wholeNumber = amount;
+  } else {
+    wholeNumber = Math.trunc(amount) !== 0 ? Math.trunc(amount) : null;
+    const numerator = Math.round((amount % 1) * 100) / 100 / 0.25;
+
+    if (numerator === 1) {
+      fractionCode = <>&frac14;</>;
+    } else if (numerator === 2) {
+      fractionCode = <>&frac12;</>;
+    } else if (numerator === 3) {
+      fractionCode = <>&frac34;</>;
+    }
+  }
+
+  return (
+    <StyledAmountAndUnit>
+      {wholeNumber} {fractionCode} {unit}
+    </StyledAmountAndUnit>
+  );
+}
 
 const StyledIngredientList = styled.ul`
   display: flex;
@@ -353,12 +384,11 @@ function IngredientList({ ingredients }: { ingredients: IngredientInfo[] }) {
   return (
     <StyledIngredientList>
       {ingredients.map((ing, index) => (
-        <Ingredient key={index}>
-          <span>
-            {ing.amount} {ing.unit}
-          </span>
+        <li key={index}>
+          <AmountAndUnit amount={ing.amount} unit={ing.unit} />
+
           <span>{ing.name}</span>
-        </Ingredient>
+        </li>
       ))}
     </StyledIngredientList>
   );
