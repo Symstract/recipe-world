@@ -180,14 +180,17 @@ const NavbarContent = styled.div`
 `;
 
 const StyledNavbar = styled.header`
+  position: fixed;
+  top: 0;
+  z-index: 99;
   width: 100%;
-  height: calc(5.4rem + 1px);
-  border-bottom: 1px solid;
+  height: ${({ theme }) => theme.navbar.mobileHeight};
+  border-bottom: ${({ theme }) => theme.navbar.borderWidth} solid;
   border-color: ${({ theme }) => theme.colors.primary};
   background: ${({ theme }) => theme.colors.surface};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    height: calc(6.6rem + 1px);
+    height: ${({ theme }) => theme.navbar.tabletHeight};
     padding: 10px 0;
   }
 `;

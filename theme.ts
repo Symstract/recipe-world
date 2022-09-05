@@ -34,6 +34,12 @@ const theme: DefaultTheme = {
     },
   },
 
+  navbar: {
+    mobileHeight: "calc(5.4rem + 1px)",
+    tabletHeight: "calc(6.6rem + 1px)",
+    borderWidth: "1px",
+  },
+
   footerHeights: {
     mobile: "6rem",
     tablet: "7rem",

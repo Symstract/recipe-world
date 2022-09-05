@@ -35,6 +35,12 @@ declare module "styled-components" {
       };
     };
 
+    navbar: {
+      mobileHeight: string;
+      tabletHeight: string;
+      borderWidth: string;
+    };
+
     footerHeights: {
       mobile: string;
       tablet: string;

@@ -14,9 +14,11 @@ const PageContainer = styled.div`
 `;
 
 const PageContent = styled.div`
+  padding-top: ${({ theme }) => theme.navbar.mobileHeight};
   padding-bottom: ${({ theme }) => theme.footerHeights.mobile};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding-top: ${({ theme }) => theme.navbar.tabletHeight};
     padding-bottom: ${({ theme }) => theme.footerHeights.tablet};
   }
 `;
