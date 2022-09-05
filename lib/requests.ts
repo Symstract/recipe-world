@@ -124,8 +124,6 @@ export async function getRecipeInfo(recipeId: number): Promise<{
       title: resInfoData.title,
     };
 
-    console.log(resInfoWithInstructions);
-
     return { data: resInfoWithInstructions, error: null };
   } catch (error) {
     return { data: null, error };
