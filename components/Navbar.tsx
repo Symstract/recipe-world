@@ -182,7 +182,7 @@ const NavbarContent = styled.div`
 const StyledNavbar = styled.header`
   position: fixed;
   top: 0;
-  z-index: 99;
+  z-index: 10;
   width: 100%;
   height: ${({ theme }) => theme.navbar.mobileHeight};
   border-bottom: ${({ theme }) => theme.navbar.borderWidth} solid;

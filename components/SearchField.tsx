@@ -143,9 +143,10 @@ interface SearchSuggestionListProps {
   formRef: React.RefObject<HTMLFormElement>;
 }
 
-const StyledSearchSuggestionList = styled.ul`
-  position: absolute;
-  z-index: 999;
+const StyledSearchSuggestionList = styled.ul<SearchSuggestionListProps>`
+  position: ${(props) =>
+    props.searchStyle === "regular" ? "absolute" : "fixed"};
+  z-index: ${(props) => (props.searchStyle === "regular" ? 2 : 20)};
   border-top: 1px solid ${({ theme }) => theme.colors.textSecondary};
   border-bottom: 1px solid ${({ theme }) => theme.colors.textSecondary};
   background: ${({ theme }) => theme.colors.surface};
@@ -196,7 +197,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
     );
     const listStyle = listRef.current.style;
 
-    listStyle.top = formRect.bottom + "px";
+    listStyle.top = formRect.bottom + window.scrollY + "px";
 
     if (window.innerWidth < tabletBreakpoint) {
       listStyle.left = "0";
@@ -210,8 +211,14 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
   useEffect(() => {
     setStyle();
     window.addEventListener("resize", setStyle);
+    if (searchStyle === "regular") window.addEventListener("scroll", setStyle);
 
-    return () => window.removeEventListener("resize", setStyle);
+    return () => {
+      window.removeEventListener("resize", setStyle);
+      if (searchStyle === "regular") {
+        window.removeEventListener("scroll", setStyle);
+      }
+    };
   });
 
   const handleClick = (id: number) => router.push(`/recipes/${id}`);
@@ -226,7 +233,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
   };
 
   const list = (
-    <StyledSearchSuggestionList ref={listRef}>
+    <StyledSearchSuggestionList ref={listRef} {...props}>
       {suggestions_.map((su, index) => (
         <li
           key={su.suggestionId}
