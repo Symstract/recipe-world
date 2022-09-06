@@ -148,7 +148,7 @@ const StyledSearchSuggestionList = styled.ul`
   z-index: 999;
   border-top: 1px solid ${({ theme }) => theme.colors.textSecondary};
   border-bottom: 1px solid ${({ theme }) => theme.colors.textSecondary};
-  background: ${(props) => props.theme.colors.surface};
+  background: ${({ theme }) => theme.colors.surface};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     border: 1px solid ${({ theme }) => theme.colors.textSecondary};
