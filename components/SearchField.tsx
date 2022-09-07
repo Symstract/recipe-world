@@ -45,9 +45,10 @@ const searchInputStyleRegular = css<SearchInputProps>`
 
 const searchInputStyleNavbar = css<SearchInputProps>`
   font-size: inherit;
+  padding-left: ${({ theme }) => theme.pageWidths.mobile.padding};
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    padding-left: ${({ theme }) => theme.pageWidths.mobile.padding};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding-left: 0;
   }
 `;
 
@@ -60,8 +61,10 @@ const SearchInput = styled.input.attrs<SearchInputProps>({
 `;
 
 const SearchButtonContainer = styled.div<{ searchStyle: SearchStyle }>`
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    display: ${(props) => (props.searchStyle === "navbar" ? "none" : "block")};
+  display: ${(props) => (props.searchStyle === "navbar" ? "none" : "block")};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: block;
   }
 `;
 
@@ -86,9 +89,12 @@ const searchFormStyleRegular = css<SearchProps>`
 `;
 
 const searchFormStyleNavbar = css<SearchProps>`
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    border-bottom: none;
-    height: 100%;
+  border-bottom: none;
+  height: 100%;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    border-bottom: 2px solid;
+    height: initial;
   }
 `;
 
@@ -199,12 +205,12 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
 
     listStyle.top = formRect.bottom + window.scrollY + "px";
 
-    if (window.innerWidth < tabletBreakpoint) {
-      listStyle.left = "0";
-      listStyle.width = "100%";
-    } else {
+    if (window.innerWidth >= tabletBreakpoint) {
       listStyle.left = formRect.left + "px";
       listStyle.width = formRect.right - formRect.left + "px";
+    } else {
+      listStyle.left = "0";
+      listStyle.width = "100%";
     }
   }, [formRef, theme.breakpoints.tablet]);
 

@@ -90,20 +90,20 @@ function SearchToggleButton({
 }
 
 const OpenButtonContainer = styled.div<{ showField: boolean }>`
-  display: none;
-  height: 100%;
+  display: ${(props) => (props.showField ? "none" : "block")};
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    display: ${(props) => (props.showField ? "none" : "block")};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: none;
+    height: 100%;
   }
 `;
 
 const CloseButtonContainer = styled.div<{ showField: boolean }>`
-  display: none;
-  height: 100%;
+  display: ${(props) => (props.showField ? "block" : "none")};
 
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    display: ${(props) => (props.showField ? "block" : "none")};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: none;
+    height: 100%;
   }
 `;
 
