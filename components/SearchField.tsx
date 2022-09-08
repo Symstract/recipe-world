@@ -304,7 +304,7 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
 
     useImperativeHandle(ref, () => ({
       focus: () => {
-        if (inputRef?.current) inputRef.current.focus();
+        inputRef.current?.focus();
       },
     }));
 
