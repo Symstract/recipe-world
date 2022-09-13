@@ -1,8 +1,13 @@
 import axios from "axios";
 
-import { RecipeCardInfo, RecipeInfo } from "lib/recipeTypes";
+import {
+  RecipeCardInfo,
+  RecipeInfo,
+  RecipeSearchSuggestion,
+} from "lib/recipeTypes";
 import {
   SpoonacularAnalyzedInstructionsResponse,
+  SpoonacularAutocompleteResponse,
   SpoonacularComplexSearchResponse,
   SpoonacularComplexSearchSortingOptions,
   SpoonacularExtendedIngredient,
@@ -188,6 +193,30 @@ export async function getRecipeCardInfos(params: {
       data: { cardsInfo, totalRecipesFoundCount: resData.totalResults },
       error: null,
     };
+  } catch (error) {
+    return { data: null, error };
+  }
+}
+
+export async function getRecipeSearchSuggestions(query: string): Promise<{
+  data: RecipeSearchSuggestion[] | null;
+  error: any | null;
+}> {
+  try {
+    const suggestions = await axiosSpoonacular.get("/autocomplete", {
+      params: { query, number: 8 },
+    });
+
+    const suggestionsData: SpoonacularAutocompleteResponse =
+      await suggestions.data;
+
+    const suggestionsInfo: RecipeSearchSuggestion[] = suggestionsData.map(
+      (sug) => {
+        return { suggestionId: sug.id, suggestionName: sug.title };
+      }
+    );
+
+    return { data: suggestionsInfo, error: null };
   } catch (error) {
     return { data: null, error };
   }

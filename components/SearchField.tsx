@@ -3,15 +3,16 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 import styled, { css, useTheme } from "styled-components";
 
 import { addOpacityToHexColor } from "lib/colorUtils";
 import { Button, ButtonStyle } from "components/Buttons";
+import { RecipeSearchSuggestion } from "lib/recipeTypes";
 import SearchIcon from "icons/search.svg";
 import { useRouter } from "next/router";
 
@@ -105,13 +106,8 @@ const SearchForm = styled.form<SearchProps>`
 
 // === Search suggestions ===
 
-interface ISearchSuggestion {
-  suggestionId: number;
-  suggestionPhrase: string;
-}
-
 interface SearchSuggestionProps
-  extends ISearchSuggestion,
+  extends RecipeSearchSuggestion,
     React.ButtonHTMLAttributes<HTMLButtonElement> {
   searchStyle: SearchStyle;
   isHighlighted: boolean;
@@ -134,7 +130,7 @@ const StyledSearchSuggestion = styled.button<SearchSuggestionProps>`
 function SearchSuggestion(props: SearchSuggestionProps) {
   return (
     <StyledSearchSuggestion {...props}>
-      {props.suggestionPhrase}
+      {props.suggestionName}
     </StyledSearchSuggestion>
   );
 }
@@ -142,8 +138,10 @@ function SearchSuggestion(props: SearchSuggestionProps) {
 interface SearchSuggestionListProps {
   searchStyle: SearchStyle;
   searchPhrase: string;
-  suggestions: ISearchSuggestion[];
-  setSuggestions: React.Dispatch<React.SetStateAction<ISearchSuggestion[]>>;
+  suggestions: RecipeSearchSuggestion[];
+  setSuggestions: React.Dispatch<
+    React.SetStateAction<RecipeSearchSuggestion[]>
+  >;
   highlightedIndex: number | null;
   setHighlightedIndex: React.Dispatch<React.SetStateAction<number | null>>;
   formRef: React.RefObject<HTMLFormElement>;
@@ -173,21 +171,45 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
     setSuggestions,
     suggestions,
   } = props;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [previousFetchSearchPhrase, setPreviousFetchSearchPhrase] =
+    useState<string>("");
 
-  // Intial test data
-  const suggestions_: ISearchSuggestion[] = useMemo(() => {
-    return [
-      { suggestionId: 715424, suggestionPhrase: "dgdfdfg" },
-      { suggestionId: 715423, suggestionPhrase: "dgdfdfg sdfwe" },
-      { suggestionId: 715422, suggestionPhrase: "dgdfdfg er5yfbg" },
-      { suggestionId: 715421, suggestionPhrase: "dgdfdfg sdae sdfsf" },
-    ];
-  }, []);
+  const fetchSuggestions = useCallback(async () => {
+    setIsLoading(true);
+    setPreviousFetchSearchPhrase(searchPhrase);
+
+    const res = await axios("/api/search-suggestions", {
+      params: { query: searchPhrase },
+    });
+    const resData = await res.data;
+
+    if (!resData.data) {
+      setSuggestions([]);
+      return;
+    }
+
+    setSuggestions(resData.data);
+    setIsLoading(false);
+  }, [searchPhrase, setSuggestions]);
 
   useEffect(() => {
-    // Fetch suggestions here
-    setSuggestions(suggestions_);
-  }, [searchPhrase, setSuggestions, suggestions_]);
+    if (isLoading || searchPhrase === previousFetchSearchPhrase) return;
+
+    if (!searchPhrase) {
+      setSuggestions([]);
+      return;
+    }
+
+    fetchSuggestions();
+  }, [
+    fetchSuggestions,
+    isLoading,
+    previousFetchSearchPhrase,
+    searchPhrase,
+    setSuggestions,
+    suggestions,
+  ]);
 
   const router = useRouter();
   const theme = useTheme();
@@ -227,6 +249,8 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
     };
   });
 
+  if (!suggestions.length) return null;
+
   const handleClick = (id: number) => router.push(`/recipes/${id}`);
   const handlePointerMove = (e: React.PointerEvent<HTMLLIElement>) => {
     const items = Array.from(e.currentTarget.parentElement!.children);
@@ -240,7 +264,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
 
   const list = (
     <StyledSearchSuggestionList ref={listRef} {...props}>
-      {suggestions_.map((su, index) => (
+      {suggestions.map((su, index) => (
         <li
           key={su.suggestionId}
           onPointerMove={handlePointerMove}
@@ -251,7 +275,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
             onClick={(e: React.MouseEvent) => handleClick(su.suggestionId)}
             searchStyle={searchStyle}
             suggestionId={su.suggestionId}
-            suggestionPhrase={su.suggestionPhrase}
+            suggestionName={su.suggestionName}
             isHighlighted={index === highlightedIndex}
           />
         </li>
@@ -282,7 +306,9 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
     const [hasFocus, setHasFocus] = useState<boolean>(false);
     const [nonAutocompletedInputValue, setNonAutocompletedInputValue] =
       useState<string>("");
-    const [suggestions, setSuggestions] = useState<ISearchSuggestion[]>([]);
+    const [suggestions, setSuggestions] = useState<RecipeSearchSuggestion[]>(
+      []
+    );
     const [highlightedSuggestionIndex, setHighlightedSuggestionIndex] =
       useState<number | null>(null);
     const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<
@@ -292,7 +318,7 @@ const SearchField = forwardRef<SearchFieldHandle, SearchFieldProps>(
     let finalInputValue;
 
     if (selectedSuggestionIndex !== null) {
-      finalInputValue = suggestions[selectedSuggestionIndex].suggestionPhrase;
+      finalInputValue = suggestions[selectedSuggestionIndex].suggestionName;
     } else {
       finalInputValue = nonAutocompletedInputValue;
     }

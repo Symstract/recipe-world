@@ -34,3 +34,8 @@ export interface RecipeInfo {
   timeInMinutes: number;
   title: string;
 }
+
+export interface RecipeSearchSuggestion {
+  suggestionId: number;
+  suggestionName: string;
+}

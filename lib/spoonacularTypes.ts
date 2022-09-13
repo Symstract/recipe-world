@@ -176,3 +176,9 @@ interface SpoonacularAnalyzedInstructionsPart {
 
 export type SpoonacularAnalyzedInstructionsResponse =
   SpoonacularAnalyzedInstructionsPart[];
+
+export type SpoonacularAutocompleteResponse = Array<{
+  id: number;
+  title: string;
+  imageType: string;
+}>;
