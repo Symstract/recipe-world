@@ -133,7 +133,7 @@ function SearchSuggestion(props: SearchSuggestionProps) {
 
   let label;
 
-  if (suggestionName.startsWith(searchPhrase)) {
+  if (suggestionName.startsWith(searchPhrase.toLowerCase())) {
     const bolded = suggestionName.slice(0, searchPhrase.length);
     const regular = suggestionName.slice(searchPhrase.length);
     label = (
