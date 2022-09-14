@@ -227,6 +227,12 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
 
     listStyle.top = formRect.bottom + window.scrollY + "px";
 
+    if (searchStyle === "regular") {
+      listStyle.top = formRect.bottom + window.scrollY + "px";
+    } else {
+      listStyle.top = formRect.bottom + "px";
+    }
+
     if (window.innerWidth >= tabletBreakpoint) {
       listStyle.left = formRect.left + "px";
       listStyle.width = formRect.right - formRect.left + "px";
@@ -234,7 +240,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
       listStyle.left = "0";
       listStyle.width = "100%";
     }
-  }, [formRef, theme.breakpoints.tablet]);
+  }, [formRef, searchStyle, theme.breakpoints.tablet]);
 
   useEffect(() => {
     setStyle();
