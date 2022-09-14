@@ -110,6 +110,7 @@ interface SearchSuggestionProps
   extends RecipeSearchSuggestion,
     React.ButtonHTMLAttributes<HTMLButtonElement> {
   searchStyle: SearchStyle;
+  searchPhrase: string;
   isHighlighted: boolean;
 }
 
@@ -128,11 +129,24 @@ const StyledSearchSuggestion = styled.button<SearchSuggestionProps>`
 `;
 
 function SearchSuggestion(props: SearchSuggestionProps) {
-  return (
-    <StyledSearchSuggestion {...props}>
-      {props.suggestionName}
-    </StyledSearchSuggestion>
-  );
+  const { searchPhrase, suggestionName } = props;
+
+  let label;
+
+  if (suggestionName.startsWith(searchPhrase)) {
+    const bolded = suggestionName.slice(0, searchPhrase.length);
+    const regular = suggestionName.slice(searchPhrase.length);
+    label = (
+      <>
+        <b>{bolded}</b>
+        {regular}
+      </>
+    );
+  } else {
+    label = suggestionName;
+  }
+
+  return <StyledSearchSuggestion {...props}>{label}</StyledSearchSuggestion>;
 }
 
 interface SearchSuggestionListProps {
@@ -280,6 +294,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
             onPointerDown={(e: React.PointerEvent) => e.preventDefault()}
             onClick={() => handleClick(su.suggestionId)}
             searchStyle={searchStyle}
+            searchPhrase={searchPhrase}
             suggestionId={su.suggestionId}
             suggestionName={su.suggestionName}
             isHighlighted={index === highlightedIndex}
