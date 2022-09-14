@@ -272,7 +272,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
         >
           <SearchSuggestion
             onPointerDown={(e: React.PointerEvent) => e.preventDefault()}
-            onClick={(e: React.MouseEvent) => handleClick(su.suggestionId)}
+            onClick={() => handleClick(su.suggestionId)}
             searchStyle={searchStyle}
             suggestionId={su.suggestionId}
             suggestionName={su.suggestionName}
