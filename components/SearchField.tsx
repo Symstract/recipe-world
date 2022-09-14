@@ -9,12 +9,12 @@ import React, {
 import ReactDOM from "react-dom";
 import axios from "axios";
 import styled, { css, useTheme } from "styled-components";
+import { useRouter } from "next/router";
 
 import { addOpacityToHexColor } from "lib/colorUtils";
 import { Button, ButtonStyle } from "components/Buttons";
 import { RecipeSearchSuggestion } from "lib/recipeTypes";
 import SearchIcon from "icons/search.svg";
-import { useRouter } from "next/router";
 
 type SearchStyle = "regular" | "navbar";
 
