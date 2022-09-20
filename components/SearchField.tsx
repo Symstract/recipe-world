@@ -6,7 +6,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
 import styled, { css, useTheme } from "styled-components";
 import { useRouter } from "next/router";
@@ -74,11 +73,10 @@ interface SearchProps {
   hasFocus: boolean;
 }
 
-const searchFormStyleRegular = css<SearchProps>`
-  display: flex;
-  width: 100%;
-  max-width: 700px;
-  border-bottom: 2px solid
+const searchFormBorderBottomWidth = "2px";
+
+const searchFormBorderBottomStyle = css<SearchProps>`
+  border-bottom: ${searchFormBorderBottomWidth} solid
     ${(props) =>
       props.hasFocus
         ? props.theme.colors.textPrimary
@@ -86,6 +84,14 @@ const searchFormStyleRegular = css<SearchProps>`
             props.theme.colors.textPrimary,
             props.theme.inputInactiveOpacity
           )};
+`;
+
+const searchFormStyleRegular = css<SearchProps>`
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 700px;
+  ${searchFormBorderBottomStyle}
   line-height: 1em;
 `;
 
@@ -94,7 +100,7 @@ const searchFormStyleNavbar = css<SearchProps>`
   height: 100%;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    border-bottom: 2px solid;
+    ${searchFormBorderBottomStyle}
     height: initial;
   }
 `;
@@ -162,14 +168,28 @@ interface SearchSuggestionListProps {
 }
 
 const StyledSearchSuggestionList = styled.ul<SearchSuggestionListProps>`
-  position: ${(props) =>
-    props.searchStyle === "regular" ? "absolute" : "fixed"};
+  position: absolute;
+  top: 100%;
+  transform: translateY(
+    ${(props) =>
+      props.searchStyle === "regular" ? searchFormBorderBottomWidth : 0}
+  );
+  width: ${(props) => (props.searchStyle === "regular" ? "100%" : "100vw")};
   z-index: ${(props) => (props.searchStyle === "regular" ? 2 : 20)};
-  border-top: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  border: ${(props) =>
+    props.searchStyle === "regular"
+      ? css`1px solid ${props.theme.colors.textSecondary}`
+      : "none"};
+  border-top: ${(props) =>
+    props.searchStyle === "regular"
+      ? "none"
+      : css`1px solid ${props.theme.colors.textSecondary}`};
   border-bottom: 1px solid ${({ theme }) => theme.colors.textSecondary};
   background: ${({ theme }) => theme.colors.surface};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    transform: translateY(${searchFormBorderBottomWidth});
+    width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.textSecondary};
     border-top: none;
   }
@@ -178,7 +198,6 @@ const StyledSearchSuggestionList = styled.ul<SearchSuggestionListProps>`
 function SearchSuggestionList(props: SearchSuggestionListProps) {
   const {
     searchStyle,
-    formRef,
     searchPhrase,
     highlightedIndex,
     setHighlightedIndex,
@@ -226,48 +245,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
   ]);
 
   const router = useRouter();
-  const theme = useTheme();
   const listRef = useRef<HTMLUListElement>(null);
-
-  const setStyle = useCallback(() => {
-    if (!formRef.current || !listRef.current) return;
-
-    const formRect = formRef.current.getBoundingClientRect();
-    const tabletBreakpoint = +theme.breakpoints.tablet.slice(
-      0,
-      theme.breakpoints.tablet.length - 2
-    );
-    const listStyle = listRef.current.style;
-
-    listStyle.top = formRect.bottom + window.scrollY + "px";
-
-    if (searchStyle === "regular") {
-      listStyle.top = formRect.bottom + window.scrollY + "px";
-    } else {
-      listStyle.top = formRect.bottom + "px";
-    }
-
-    if (window.innerWidth >= tabletBreakpoint) {
-      listStyle.left = formRect.left + "px";
-      listStyle.width = formRect.right - formRect.left + "px";
-    } else {
-      listStyle.left = "0";
-      listStyle.width = "100%";
-    }
-  }, [formRef, searchStyle, theme.breakpoints.tablet]);
-
-  useEffect(() => {
-    setStyle();
-    window.addEventListener("resize", setStyle);
-    if (searchStyle === "regular") window.addEventListener("scroll", setStyle);
-
-    return () => {
-      window.removeEventListener("resize", setStyle);
-      if (searchStyle === "regular") {
-        window.removeEventListener("scroll", setStyle);
-      }
-    };
-  });
 
   if (!suggestions.length) return null;
 
@@ -282,7 +260,7 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
     setHighlightedIndex(null);
   };
 
-  const list = (
+  return (
     <StyledSearchSuggestionList ref={listRef} {...props}>
       {suggestions.map((su, index) => (
         <li
@@ -302,11 +280,6 @@ function SearchSuggestionList(props: SearchSuggestionListProps) {
         </li>
       ))}
     </StyledSearchSuggestionList>
-  );
-
-  return ReactDOM.createPortal(
-    list,
-    document.getElementById("__next") as HTMLDivElement
   );
 }
 
